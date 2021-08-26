@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    
+
     <title>MedBlock</title>
 
     <!-- Bootstrap Core CSS -->
@@ -122,22 +122,22 @@
                                     <td id="age"></td>
                                 </tr>
                             </table>
-                            
+
                             <div class="text-center">
                                     <h5>Your records are stored here: http://localhost:8080/ipfs/<span id="recordsHash"></span></h5>
                                 <button type="submit" class="btn btn-info btn-lg" onclick="showRecords(this)">View medical records</button>
-                                
+
                             </div>
                             <pre id="records" style="margin-top: 20px;">
 
                             </pre>
-                           
+
                         </div>
                     </div>
-                       
+
                 </div>
             </div>
-            
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="text-center">Share your Medical Record</h3>
@@ -149,9 +149,9 @@
                         </div>
                     </div>
 
-                    
+
                     <form class="form-horizontal" action="/action_page.php">
-                        <div class="form-group"> 
+                        <div class="form-group">
                             <label for="permitDoctorList" class="control-label col-sm-2">Doctor:</label>
                             <div class="col-sm-8">
                                 <select class="form-control" id="permitDoctorList">
@@ -165,7 +165,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="text-center">Current EMR access holders</h3>
@@ -189,7 +189,7 @@
                     </div>
 
                 </div>
-            </div>           
+            </div>
         </div>
 
 <script src="js/jquery.js"></script>
@@ -223,14 +223,14 @@
 
         $("#buyInsurance").hide();
         $("#insuranceInfo").hide();
-        
+
         // print patient details and insurer details (if exists). If insurer does not exist show the buy insurance panel
         console.log("Getting Patient Data");
         contractInstance.get_patient.call(key, {gas: 1000000}, function(error, result){
             console.log("Patient Data Result:"+result);
             if(!error){
                 console.log(result);
-                a = result[0]; 
+                a = result[0];
                 b = result[1];
                 ailments = result[2];
                 insurerAddress = result[3];
@@ -245,18 +245,18 @@
 
                 } else {
                     var InsurerList = 0;
-                    
+
                     contractInstance.get_insurer_list({gas: 1000000}, function(error, result){
 
                         if(!error){
-                            
+
                             InsurerList = result;
                             var list = document.getElementById("insurers");
                             for (var i = 0; i < InsurerList.length; i++) {
-                                
+
                                 contractInstance.get_insurer.call(InsurerList[i], {gas: 1000000}, function(error, result){
-                                    
-                                    
+
+
                                     if(!error){
                                         d = result[0];
 
@@ -279,7 +279,7 @@
             else
                 console.error(error);
         });
-        
+
         // print out the doctors to share emr
         var DoctorList = 0;
         console.log("Getting Doctor List");
@@ -295,7 +295,7 @@
                         var list = document.getElementById("permitDoctorList");
 
                         if(!error) {
-                            [a, b] = result; 
+                            [a, b] = result;
                             var option = document.createElement("option");
                             option.text = a;
                             list.add(option);
@@ -305,7 +305,7 @@
                             console.error(error);
                     })
                 }
-            } 
+            }
             else
                 console.error(error);
         });
@@ -316,8 +316,8 @@
             if(!error){
                 doctorAddressList = result;
                 // console.log(result);
-                
-               
+
+
                 doctorAddressList.forEach(function(doctorAddress, index){
                     contractInstance.get_doctor.call(doctorAddress, {gas: 1000000}, function(error, result){
                         var table = document.getElementById("accessDoc");
@@ -339,7 +339,7 @@
                     })
                 })
             }
-            else 
+            else
                 console.error(error);
         });
 
@@ -365,10 +365,10 @@
             element.innerHTML = "View Medical Records";
             element.className = "btn btn-info btn-lg"
         }
-        
+
     }
 
-    
+
 
     function giveAccess() {
 
@@ -402,7 +402,7 @@
                         $(".alert-info").show();
                         console.log(error);
                     }
-                                            
+
                 })
 
             } else
@@ -423,11 +423,11 @@
                 $(".alert-danger").show();
                 console.log(error);
             }
-                                    
+
         });
     }
 
-    
+
 
 </script>
 

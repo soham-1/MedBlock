@@ -13,24 +13,32 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!-- Custom CSS -->
     <style>
-    .panel-heading{
-        margin-bottom: 20px;
+        .navHeaderWrapper.header-image {
+        background-image: linear-gradient(90deg, rgba(233, 30, 99, .83) -73%, #270349 100%);
+        background-size: cover;
+        width: 100%;
+        height: 100%;
     }
-    .navbar{
-        margin-bottom: 70px;
+    .container{
+        background-color: white;
+        height: 100%;
     }
     </style>
     <script src="/js/web3.min.js"></script>
 </head>
 
 <body>
+    <div id="navHeadWrapper" class="navHeaderWrapper header-image">
+    <div id="includedContent">
 
+    </div>
         <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+        <!-- <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
                 <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
+
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                             <span class="sr-only">Toggle navigation</span>
@@ -40,7 +48,7 @@
                         </button>
                         <a class="navbar-brand" href="#">MedBlock</a>
                     </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
+
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <li>
@@ -51,12 +59,12 @@
                             </li>
                         </ul>
                     </div>
-                    <!-- /.navbar-collapse -->
+
                 </div>
-                <!-- /.container -->
-            </nav>
-        
-        <div class="container">
+
+            </nav> -->
+
+        <div class="container mt-5 mb-5">
             <div class="panel panel-default">
                 <div class="panel-heading">
                         <h3 class="text-center">Please enter your details to register.</h3>
@@ -66,12 +74,12 @@
                         <div class="alert alert-warning col-sm-8 col-sm-offset-2" style="display: none;">
                             <strong>Warning!</strong> Invalid public key. Please enter a valid public key to register.
                         </div>
-                                    
+
                         <div class="alert alert-info col-sm-8 col-sm-offset-2" style="display: none;">
                             <strong>Info!</strong> User already registered. Please check your details.
                         </div>
                     </div>
-                    
+
                     <form name="registerForm" class="form-horizontal" action="./doctor.html">
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="name">Name:</label>
@@ -85,7 +93,7 @@
                                 <input type="age" class="form-control" id="age" placeholder="Enter age" name = "Age" required>
                             </div>
                         </div>
-                        <div class="form-group"> 
+                        <div class="form-group">
                             <label for="designation" class="control-label col-sm-2">Registering as</label>
                             <div class="col-sm-8">
                                 <select class="form-control" id="designation" required>
@@ -102,18 +110,19 @@
                     </div>
                 </div>
             </div>
-            
-            <hr>
-                
         </div>
-        
-
+    </div>
+        <script>
+            $(function(){
+                  $("#includedContent").load("index.html");
+                });
+                </script>
 
 <script src="js/jquery.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
-<script src="js/app.js"></script>
+ <script src="js/app.js"></script>
 <script src="/js/web3.min.js"></script>
 <script src="https://unpkg.com/ipfs-api/dist/index.min.js" crossorigin="anonymous"></script>
 
@@ -129,7 +138,7 @@
 
         designation = $("#designation").val();
         designation = parseInt(designation);
-        
+
         publicKey = web3.currentProvider.selectedAddress;
         publicKey = publicKey.toLowerCase();
         console.log("PK:"+publicKey);
@@ -142,7 +151,7 @@
 
         contractInstance.get_patient_list({gas: 1000000},function(error, result){
             if(!error)
-                PatientList = result; 
+                PatientList = result;
             else
                 console.error(error);
             });
@@ -183,18 +192,18 @@
             console.log(validAgent);
             if (validAgent == true) {
                 $(".alert-warning").hide()
-                $(".alert-info").hide();   
-                
+                $(".alert-info").hide();
+
                 var ipfshash = "";
 
                 if (designation == "0") {
-                    var reportTitle = 
+                    var reportTitle =
 `Name: ${name}
 Public Key: ${publicKey}
-                            
+
 `;
                     var buffer = Buffer(reportTitle);
-                    
+
                     ipfs.files.add(buffer, (error, result) => {
                         if(error){
                             console.log(error);
@@ -208,7 +217,7 @@ Public Key: ${publicKey}
                                 }else{
                                     console.log(err);
                                 }
-                                
+
                             })
                         }
                     })
@@ -218,15 +227,15 @@ Public Key: ${publicKey}
                         if (designation == "1") {
                             location.replace("./doctor.html");
                         }
-                        
+
                     } else
                         console.log(err);
                     });
-                }              
+                }
             }
             else {
                 $(".alert-info").show();
-            } 
+            }
 
         }
 
