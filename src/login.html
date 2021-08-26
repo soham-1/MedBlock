@@ -7,6 +7,9 @@
 	<title>Medblock </title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <style>
+                body, html {
+  height: 100%;
+}
         .navHeaderWrapper.header-image {
         background-image: linear-gradient(90deg, rgba(233, 30, 99, .83) -73%, #270349 100%);
         background-size: cover;
@@ -15,7 +18,6 @@
     }
     .container{
         background-color: white;
-        height: 100%;
     }
     </style>
 </head>
@@ -41,7 +43,7 @@
                     </div>
                 </form>
                 <div class="text-center">
-                    <button class="btn btn-primary btn-lg" onclick="login()">Login</button>
+                    <button class="btn btn-primary btn-lg mb-4" onclick="login()">Login</button>
                 </div>
 
             </div>
@@ -74,6 +76,7 @@
                     var PatientList = result;
                     for(var i = 0; i < PatientList.length; i++) {
                         if (publicKey.toLowerCase() == PatientList[i]) {
+
                             location.href = "./patient.html?key=" + publicKey;
                         }
                     }

@@ -40,7 +40,25 @@
     }
     .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus{
         color: #23527c;
-        background-color: inherit; 
+        background-color: inherit;
+    }
+    body, html {
+  height: 100%;
+}
+        .navHeaderWrapper.header-image {
+        background-image: linear-gradient(90deg, rgba(233, 30, 99, .83) -73%, #270349 );
+          /* Full height */
+  height: 100%;
+
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+
+    }
+    .container{
+        background-color: white;
+
     }
     </style>
 
@@ -48,25 +66,20 @@
 </head>
 
 <body>
-
+    <div id="navHeadWrapper" class="navHeaderWrapper header-image">
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+
                 <a class="navbar-brand" href="#">MedBlock</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="./index.html">Logout</a>
+                        <a href="./home.html">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -95,11 +108,11 @@
                         </table>
                     </div>
                 </div>
-                    
+
             </div>
         </div>
 
-        
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="text-center">Accessible EMRs</h3>
@@ -122,7 +135,8 @@
                     </div>
                 </div>
             </div>
-        </div>  
+        </div>
+    </div>
     </div>
 
 <script src="js/jquery.js"></script>
@@ -149,13 +163,13 @@
     var url = new URL(url_string);
     var key ;
     var docName = "";
-    
+
     toggleRecordsButton = 0;
 
     $(window).load(function() {
         connect();
         $(".alert-danger").hide();
-        
+
         key = web3.currentProvider.selectedAddress;
         key = key.toLocaleLowerCase();
 
@@ -163,13 +177,13 @@
         var b = 0;
         contractInstance.get_doctor.call(key, {gas: 1000000},function(error, result){
             if(!error){
-                a = result[0]; 
+                a = result[0];
                 b = result[1];
                 docName = a;
                 $("#name").html(a);
                 $("#age").html(b.c[0]);
             }
-                
+
             else
                 console.error(error);
         });
@@ -196,19 +210,19 @@
                             cell2.innerHTML = patientAddress;
                             cell3.innerHTML = '<input class="btn btn-success" onclick="showRecords(this)" id="viewRecordsButton" type="button" value="View records"></input>';
 
-                            
+
                         }
                         else
                             console.error(error);
                     })
                 })
             }
-            else 
+            else
                 console.error(error);
         });
 
     });
-        
+
     function showRecords(element){
 
         var table = document.getElementById("viewPatient");
@@ -218,7 +232,7 @@
         if (toggleRecordsButton%2 == 0){
 
             var patientRecord = ""
-            
+
             contractInstance.get_hash(patientAddress, {gas: 1000000}, function(error, result){
                 if(!error){
 
@@ -263,17 +277,17 @@
                                                         <textarea class="form-control" rows="5" id="details" placeholder="Enter details to be added" name = "Details" style="width: inherit" required autofocus></textarea>
                                                         <!-- <input type="text" class="form-control" id="details" placeholder="Enter details to be added" name = "Details" style="width: inherit" required autofocus> -->
                                                     </div>
-                                                </div>    
+                                                </div>
                                             </div>
                                             <div class="form-group col-sm-2">
                                                 <button class="btn btn-primary" onclick = "submitDiagnosis(this,`+index+`)">Submit</button>
                                             </div>
                                         </div>
                                     </div>
-                                </div>     
+                                </div>
                             </div>
                         </div>`
-            
+
                         var row1 = table.insertRow(index+1);
                         var cell1 = row1.insertCell(0);
                         cell1.colSpan = 3;
@@ -282,11 +296,11 @@
 
                     })
 
-                    
+
                 }else{
                     console.log(error);
                 }
-            })            
+            })
 
             toggleRecordsButton +=1
             element.value = "Hide Records";
@@ -299,7 +313,7 @@
             element.value = "View Records";
             element.className = "btn btn-success"
         }
-        
+
     }
 
     function getDateTime(){
@@ -307,11 +321,11 @@
             return (num >= 0 && num < 10) ? "0" + num : num + "";
         }
         var now = new Date();
-        var strDateTime = [[AddZero(now.getDate()), 
-        AddZero(now.getMonth() + 1), 
-        now.getFullYear()].join("/"), 
-        [AddZero(now.getHours()), 
-        AddZero(now.getMinutes())].join(":"), 
+        var strDateTime = [[AddZero(now.getDate()),
+        AddZero(now.getMonth() + 1),
+        now.getFullYear()].join("/"),
+        [AddZero(now.getHours()),
+        AddZero(now.getMinutes())].join(":"),
         now.getHours() >= 12 ? "PM" : "AM"].join(" ");
         return strDateTime;
     }
@@ -320,7 +334,7 @@
     {
         var table = document.getElementById("viewPatient");
         var patientAddress = table.rows[index].cells[1].innerHTML;
-      
+
         console.log(patientAddress);
         var diagnosis = $("#ailmentsList"+patientAddress).val();
         diagnosis = parseInt(diagnosis);
@@ -329,17 +343,17 @@
 
         var oldRecords = $("#records"+patientAddress).html();
 
-        var newRecords = 
+        var newRecords =
 `Diagnosed By : ${docName}
 Diagnosis Time : ${getDateTime()}
 Diagnosis : ${diagnosed}
 Comments : ${comments}
 
-        
+
 `
 
         var updatedRecords = oldRecords+newRecords;
-        
+
         if (!isNaN(diagnosis)){
 
             var buffer = Buffer(updatedRecords);
@@ -356,7 +370,7 @@ Comments : ${comments}
                             table.deleteRow(index+1);
 
                             // delete main row of corresponding content row
-                            table.deleteRow(index); 
+                            table.deleteRow(index);
                         }else{
                             $(".alert-danger").show();
                             console.log(error);
@@ -364,7 +378,7 @@ Comments : ${comments}
                     })
                 }
             });
-            
+
         }
         else{
             alert("Select a diagnosis");
