@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+      <span class="text-white navbar-brand fw-bold fs-1">MedBlock</span>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="background-color: transparent;">
+            <li class="nav-item me-3">
+                <!-- <a class="nav-link" href="./register.html"><span class="text-white fw-bold fs-5">Register</span></a> -->
+                <span class="nav-link text-white fw-bold fs-5" data-bs-toggle="modal" data-bs-target="#registerModal">Register</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link text-white fw-bold fs-5" data-bs-toggle="modal" data-bs-target="#loginModal">Login</span>
+            </li>
+        </ul>
+        <form class="d-flex">
+        </form>
+      </div>
+    </div>
+</nav>
+
+<!-- LOGIN MODAL -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">Login</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          login from current metamask account
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="login()">Login</button>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- LOGIN MODAL ENDS -->
+
+<!-- REGISTER MODAL -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="registerModalLabel">Register</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form>
+          <div class="mb-3">
+            <label for="Name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter name" name="Name" required autofocus>
+          </div>
+          <div class="mb-3">
+            <label for="Age" class="form-label">Age</label>
+            <input type="age" class="form-control" id="age" placeholder="Enter age" name = "Age" required>
+          </div>
+          <div class="mb-3">
+            <label for="designation" class="control-label">Registering as</label>
+            <div>
+                <select class="form-control" id="designation" required>
+                    <option selected disabled>-- Please Select --</option>
+                    <option value="0">Patient</option>
+                    <option value="1">Doctor</option>
+                </select>
+            </div>
+          </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="addAgent()">Register</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- REGISTER MODAL ENDS -->
