@@ -102,6 +102,20 @@
                     $(".alert-warning").show();
                 }
             });
+            contractInstance.get_insurer_list(function(error, result){
+                if(!error){
+                    var InsurerList = result;
+                    for(var i = 0; i < InsurerList.length; i++) {
+                        if (publicKey.toLowerCase() == InsurerList[i]) {
+                            location.href = "./insurer.html?key=" + publicKey;
+                        }
+                    }
+
+                } else {
+                    console.log(error);
+                    $(".alert-warning").show();
+                }
+            });
 
             console.log("Invalid User!");
             $(".alert-warning").show();
