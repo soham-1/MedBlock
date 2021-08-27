@@ -14,7 +14,7 @@ function login(){
                 if (publicKey.toLowerCase() == PatientList[i]) {
 
                     // location.href = "./patient.html?key=" + publicKey;
-                    location.href = "./patient1.html";
+                    location.href = "./patient.html";
                 }
             }
 
