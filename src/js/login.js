@@ -5,15 +5,13 @@ connect();
 
 function login(){
 
-    publicKey= web3.currentProvider.selectedAddress;
+    publicKey = web3.currentProvider.selectedAddress;
     console.log(publicKey);
     contractInstance.get_patient_list(function(error, result){
         if(!error){
             var PatientList = result;
             for(var i = 0; i < PatientList.length; i++) {
                 if (publicKey.toLowerCase() == PatientList[i]) {
-
-                    // location.href = "./patient.html?key=" + publicKey;
                     location.href = "./patient.html";
                 }
             }
@@ -136,7 +134,7 @@ Public Key: ${publicKey}
                 if(error){
                     console.log(error);
                 }else{
-                    console.log("result:"+result);
+                    console.log("result:"+result)
                     ipfshash = result[0].hash;
                     console.log("Ipfs hash:"+ipfshash);
                     contractInstance.add_agent(name1, age, designation, ipfshash, {gas: 1000000}, (err, res) => {
