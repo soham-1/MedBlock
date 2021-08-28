@@ -22,6 +22,10 @@ $(window).load(function() {
     key = web3.currentProvider.selectedAddress;
     key = key.toLocaleLowerCase();
 
+    // var ipfs = window.IpfsApi('localhost', '5001')
+
+    const Buffer = window.IpfsApi().Buffer;
+
     var a = "";
     var b = 0;
     var ailments = [];
@@ -172,4 +176,55 @@ function showRecords(element){
         element.className = "btn btn-info btn-lg"
     }
 
+}
+
+// function handleFileUpload(e) {
+//     var form_data = new FormData(e.target);
+//     console.log("name of uploaded file : " + form_data.get('medical_record').name)
+//     // console.log("data here " + form_data);
+//     let record_file = form_data.get("medical_record");
+//     // let record_file = e.target.files[0];
+
+//     let reader = new window.FileReader();
+//     reader.readAsArrayBuffer(record_file);
+//     reader.onload = () => {
+//         var arrayBuffer = new Uint8Array(reader.result);
+//         console.log(arrayBuffer);
+//         // var buffer = Buffer.from(reader.result, 'base64')
+//         // var buffer = Buffer(reader.result);
+//         ipfs.files.add(arrayBuffer, (error, result) => {
+//                             if(error){
+//                                 console.log(error)
+//                             }else{
+//                                 ipfshash = result[0].hash;
+//                                 console.log(ipfshash);
+//                             }
+//                         });
+//     };
+// //     var buffer = Buffer(record_file);
+
+// //             
+//     return true;
+// }
+
+function handleFileUpload() {
+    const reader = new FileReader();
+  reader.onloadend = function() {
+    const ipfs = window.IpfsApi('localhost', 5001) // Connect to IPFS
+    const buf = buffer.Buffer(reader.result) // Convert data into buffer
+    ipfs.files.add(buf, (err, result) => { // Upload buffer to IPFS
+      if(err) {
+        console.error(err)
+        return
+      }
+      let url = `https://ipfs.io/ipfs/${result[0].hash}`
+      console.log(`Url --> ${url}`)
+    //   document.getElementById("url").innerHTML= url
+    //   document.getElementById("url").href= url
+    //   document.getElementById("output").src = url
+
+    })
+  }
+  const photo = document.getElementById("fileUpload");
+  reader.readAsArrayBuffer(photo.files[0]); // Read Provided File
 }
