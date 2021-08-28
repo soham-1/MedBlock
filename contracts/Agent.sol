@@ -77,7 +77,7 @@ contract Agent {
     function get_insurer(address addr) view public returns (string memory , string memory){
         // if(keccak256(patientInfo[addr].name) == keccak256(""))revert();
         return (insurerInfo[addr].name, insurerInfo[addr].email);
-    }get
+    }
 
     function get_doctor(address addr) view public returns (string memory , uint){
         // if(keccak256(doctorInfo[addr].name)==keccak256(""))revert();
