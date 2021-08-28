@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>MedBlock</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- Custom CSS -->
+    <style>
+        body, html {
+  height: 100%;
+}
+        .navHeaderWrapper.header-image {
+        background-image: linear-gradient(90deg, rgba(233, 30, 99, .83) -73%, #270349 );
+          /* Full height */
+
+  height: 100%;
+
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+
+    }
+    .container{
+        background-color: white;
+
+    }
+    </style>
+    <script src="/js/web3.min.js"></script>
+</head>
+
+<body>
+    <div id="navHeadWrapper" class="navHeaderWrapper header-image">
+
+
+        <div class="container mt-5 mb-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                        <h3 class="text-center">Please enter your details to register.</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="alert alert-warning col-sm-8 col-sm-offset-2" style="display: none;">
+                            <strong>Warning!</strong> Invalid public key. Please enter a valid public key to register.
+                        </div>
+
+                        <div class="alert alert-info col-sm-8 col-sm-offset-2" style="display: none;">
+                            <strong>Info!</strong> User already registered. Please check your details.
+                        </div>
+                    </div>
+
+                    <form name="registerForm" class="form-horizontal" action="./doctor.html">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="name">Name:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="name" placeholder="Enter name" name = "Name" required autofocus>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="email">email:</label>
+                            <div class="col-sm-8">
+                                <input type="email" class="form-control" id="email" placeholder="Enter email" name = "email" required>
+                            </div>
+                        </div>
+
+
+                    </form>
+                    <div class="text-center">
+                        <button class="btn btn-primary btn-lg mb-4" onclick="addAgent()">Register</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+     
+
+<script src="js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+ <script src="js/app.js"></script>
+<script src="/js/web3.min.js"></script>
+<script src="https://unpkg.com/ipfs-api/dist/index.min.js" crossorigin="anonymous"></script>
+
+<script>
+
+    function addAgent(){
+        var ipfs = window.IpfsApi('localhost', '5001')
+
+        const Buffer = window.IpfsApi().Buffer;
+
+        name = $("#name").val();
+        email = $("#email").val();
+
+
+
+        publicKey = web3.currentProvider.selectedAddress;
+        publicKey = publicKey.toLowerCase();
+        console.log("PK:"+publicKey);
+
+        var validPublicKey = true;
+        var validAgent = true;
+        var PatientList = 0;
+        var DoctorList = 0;
+        var InsurerList = 0;
+
+        contractInstance.get_patient_list({gas: 1000000},function(error, result){
+            if(!error)
+                PatientList = result;
+            else
+                console.error(error);
+            });
+
+        contractInstance.get_doctor_list({gas: 1000000},function(error, result){
+            if(!error)
+                DoctorList = result;
+            else
+                console.error(error);
+            });
+
+        contractInstance.get_insurer_list({gas: 1000000},function(error, result){
+            if(!error)
+                InsurerList = result;
+            else
+                console.error(error);
+            });
+
+        if (validPublicKey == false) {
+            $(".alert-warning").show();
+        }
+        else{
+
+            for(j = 0; j < InsurerList.length; j++) {
+                 if (publicKey == InsurerList[j] ){
+                     validAgent = false;
+                }
+            }
+            console.log(validAgent);
+            if (validAgent == true) {
+                $(".alert-warning").hide()
+                $(".alert-info").hide();
+
+                var ipfshash = "";
+
+
+                    contractInstance.add_insurer(name, email, {gas: 1000000}, (err, res) => {
+                    if (!err) {
+
+                        location.replace("./insurer.html");
+
+
+                    } else
+                        console.log(err);
+                    });
+
+            }
+            else {
+                $(".alert-info").show();
+            }
+
+        }
+
+        return false;
+    }
+</script>
+
+</body>
+
+</html>

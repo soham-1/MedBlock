@@ -39,6 +39,20 @@ function login(){
             alert("invalid or unregistered user !");
         }
     });
+    contractInstance.get_insurer_list(function(error, result){
+        if(!error){
+            var InsurerList = result;
+            for(var i = 0; i < InsurerList.length; i++) {
+                if (publicKey.toLowerCase() == InsurerList[i]) {
+                    location.href = "./insurer.html?key=" + publicKey;
+                }
+            }
+
+        } else {
+            console.log(error);
+            $(".alert-warning").show();
+        }
+    });
 }
 
 
@@ -47,7 +61,7 @@ function addAgent(){
 
     const Buffer = window.IpfsApi().Buffer;
 
-    name = $("#name").val();
+    name1 = $("#name").val();
     age = $("#age").val();
 
     designation = $("#designation").val();
@@ -112,7 +126,7 @@ function addAgent(){
 
             if (designation == "0") {
                 var reportTitle =
-`Name: ${name}
+`Name: ${name1}
 Public Key: ${publicKey}
 
 `;
@@ -125,7 +139,7 @@ Public Key: ${publicKey}
                     console.log("result:"+result);
                     ipfshash = result[0].hash;
                     console.log("Ipfs hash:"+ipfshash);
-                    contractInstance.add_agent(name, age, designation, ipfshash, {gas: 1000000}, (err, res) => {
+                    contractInstance.add_agent(name1, age, designation, ipfshash, {gas: 1000000}, (err, res) => {
                         if(!err){
                             location.replace("./patient.html");
                         }else{
@@ -136,7 +150,7 @@ Public Key: ${publicKey}
                 }
             })
         }else {
-                contractInstance.add_agent(name, age, designation, ipfshash, {gas: 1000000}, (err, res) => {
+                contractInstance.add_agent(name1, age, designation, ipfshash, {gas: 1000000}, (err, res) => {
                 if (!err) {
                     if (designation == "1") {
                         location.replace("./doctor.html");

@@ -1,7 +1,7 @@
 pragma solidity ^0.5.1;
 
 contract Agent {
-    
+
     struct patient {
         string name;
         uint age;
@@ -9,29 +9,36 @@ contract Agent {
         uint[] diagnosis;
         string record;
     }
-    
+
     struct doctor {
         string name;
         uint age;
         address[] patientAccessList;
+    }
+    struct insurer {
+        string name;
+        address [] clientlist;
+        string email;
     }
 
     uint creditPool;
 
     address[] public patientList;
     address[] public doctorList;
+    address[] public insurerlist;
 
     mapping (address => patient) patientInfo;
     mapping (address => doctor) doctorInfo;
     mapping (address => address) Empty;
+    mapping (address => insurer) insurerInfo;
     // might not be necessary
     mapping (address => string) patientRecords;
-    
+
 
 
     function add_agent(string memory _name, uint _age, uint _designation, string memory _hash) public returns(string memory){
         address addr = msg.sender;
-        
+
         if(_designation == 0){
             patient memory p;
             p.name = _name;
@@ -51,12 +58,26 @@ contract Agent {
            revert();
        }
     }
+    function add_insurer(string memory _name, string memory _email) public returns(string memory){
+        address addr = msg.sender;
+            insurer memory p;
+            p.name = _name;
+            p.email = _email;
+            insurerInfo[msg.sender] = p;
+            insurerlist.push(addr)-1;
+            return _name;
+
+    }
 
 
     function get_patient(address addr) view public returns (string memory , uint, uint[] memory , address, string memory ){
         // if(keccak256(patientInfo[addr].name) == keccak256(""))revert();
         return (patientInfo[addr].name, patientInfo[addr].age, patientInfo[addr].diagnosis, Empty[addr], patientInfo[addr].record);
     }
+    function get_insurer(address addr) view public returns (string memory , string memory){
+        // if(keccak256(patientInfo[addr].name) == keccak256(""))revert();
+        return (insurerInfo[addr].name, insurerInfo[addr].email);
+    }get
 
     function get_doctor(address addr) view public returns (string memory , uint){
         // if(keccak256(doctorInfo[addr].name)==keccak256(""))revert();
@@ -70,10 +91,10 @@ contract Agent {
         require(msg.value == 2 ether);
 
         creditPool += 2;
-        
+
         doctorInfo[addr].patientAccessList.push(msg.sender)-1;
         patientInfo[msg.sender].doctorAccessList.push(addr)-1;
-        
+
     }
 
 
@@ -85,9 +106,9 @@ contract Agent {
                 msg.sender.transfer(2 ether);
                 creditPool -= 2;
                 patientFound = true;
-                
+
             }
-            
+
         }
         if(patientFound==true){
             set_hash(paddr, _hash);
@@ -130,9 +151,9 @@ contract Agent {
         remove_element_in_array(doctorInfo[daddr].patientAccessList, paddr);
         remove_element_in_array(patientInfo[paddr].doctorAccessList, daddr);
     }
-    
+
     function get_accessed_doctorlist_for_patient(address addr) public view returns (address[] memory )
-    { 
+    {
         address[] storage doctoraddr = patientInfo[addr].doctorAccessList;
         return doctoraddr;
     }
@@ -141,7 +162,7 @@ contract Agent {
         return doctorInfo[addr].patientAccessList;
     }
 
-    
+
     function revoke_access(address daddr) public payable{
         remove_patient(msg.sender,daddr);
         msg.sender.transfer(2 ether);
@@ -155,6 +176,10 @@ contract Agent {
     function get_doctor_list() public view returns(address[] memory ){
         return doctorList;
     }
+    function get_insurer_list() public view returns(address[] memory ){
+        return insurerlist;
+    }
+
 
     function get_hash(address paddr) public view returns(string memory ){
         return patientInfo[paddr].record;
@@ -165,4 +190,3 @@ contract Agent {
     }
 
 }
-
