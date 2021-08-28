@@ -1,4 +1,5 @@
 pragma solidity ^0.5.1;
+pragma experimental ABIEncoderV2;
 
 contract Agent {
 
@@ -8,6 +9,8 @@ contract Agent {
         address[] doctorAccessList;
         uint[] diagnosis;
         string record;
+        string[] file_name;
+        string[] file_hash;
     }
 
     struct doctor {
@@ -187,6 +190,16 @@ contract Agent {
 
     function set_hash(address paddr, string memory _hash) internal {
         patientInfo[paddr].record = _hash;
+    }
+
+    function add_file_hash(address patient_address, string memory _name, string memory _hash) public returns (string[] memory) {
+        patientInfo[patient_address].file_hash.push(_hash);
+        patientInfo[patient_address].file_name.push(_name);
+        return patientInfo[patient_address].file_name;
+    }
+
+    function get_patient_files(address patient_address) public returns (string[] memory) {
+        return patientInfo[patient_address].file_name;
     }
 
 }
