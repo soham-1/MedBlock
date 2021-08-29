@@ -52,23 +52,7 @@ $(window).on('load', function() {
     populate_patient_list(ls);
 });
 
-function populate_patient_list(patient_list) {
-    let table = document.getElementById('table-body');
-    patient_list.forEach(patient => {
-        let row = document.createElement('tr');
-        let cell_data = document.createElement('td');
-        let button = document.createElement('td');
-        button.innerHTML = `<button class="btn btn-primary rounded-pill" id="${patient.key}" onclick="get_file('${patient.key}')">upload</button><input type="file" id="fileupload" style="display: none"/>`;
-        let name = document.createTextNode(patient.name);
-        cell_data.appendChild(name);
-        row.appendChild(cell_data);
-        row.appendChild(button);
-        table.appendChild(row);
-    });
-
-    $('button').on('click', function(e) { get_file(e.target.id); }); // don't place inside for loop
-
-}
+$('button').on('click', function(e) { get_file(e.target.id); }); // don't place inside for loop
 
 function get_file(patient_key) {
     $('#fileupload').trigger('click');
