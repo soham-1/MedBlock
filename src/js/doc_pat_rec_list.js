@@ -13,7 +13,21 @@ $(window).on('load', function() {
     key = key.toLocaleLowerCase();
     var url = new URL(location.href);
     patient_key = url.searchParams.get("key");
+    document.getElementById('publickey').innerHTML = "Patient Address-" + patient_key;
+    contractInstance.get_patient.call(patient_key, {gas: 1000000}, function(error, result){
 
+        if(!error){
+         console.log(result);
+            _name = result[0];
+            var b = result[1].c[0];
+            console.log(b);
+           document.getElementById('name').innerHTML = _name;
+            $("#age").html(b);
+           }
+           else{
+            console.log(error);
+           }
+    });
     populate_patient_rec_list();
 
 });
