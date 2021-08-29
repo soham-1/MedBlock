@@ -11,6 +11,4 @@ $(window).on('load', function() {
     key = web3.currentProvider.selectedAddress;
     key = key.toLocaleLowerCase();
 
- 
-
 });
