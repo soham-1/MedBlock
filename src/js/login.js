@@ -48,8 +48,6 @@ function login(){
             $(".alert-warning").show();
         }
     });
-    console.log("user not found !");
-    alert("user not found !");
 }
 
 
