@@ -8,7 +8,7 @@ const Buffer = window.IpfsApi().Buffer;
 
 $(window).on('load', function() {
     connect();
-    key = web3.currentProvider.selectedAddress;
+    key = web3.currentProvider.selectedAddress; 
     key = key.toLocaleLowerCase();
 });
 
@@ -32,7 +32,7 @@ function upload() {
         let url = `http://localhost:8080/ipfs/${result[0].hash}`
         console.log(`Url = ${url}`)
 
-        contractInstance.add_file_hash.call(key, file_name, result[0].hash, {gas: 1000000}, function(error, res){
+        contractInstance.add_file_hash(key, file_name, result[0].hash, {gas: 1000000}, function(error, res){
             if (!err) {
                 console.log("result is");
                 console.log(res);
@@ -47,11 +47,28 @@ function upload() {
 }
 
     function displayHash() {
-        contractInstance.get_patient_files.call(key, {gas: 1000000},function(error, result){
-        if(!error) {
-            console.log(result);
-        } else {
-          console.error(error);
-        }
-    });
+      var total_len;
+        contractInstance.get_total_patient_files.call(key, {gas: 1000000},function(error, result){
+          if(!error) {
+              console.log("result object");
+              console.log(result.c);
+              console.log("total files are");
+              console.log(result.c[0]);
+              total_len = result.c[0];
+
+              for (var j=0; j<total_len; j++) {
+                contractInstance.get_file_from_index.call(key, j, {gas: 1000000},function(error, result){
+                  if(!error) {
+                      console.log(result);
+                      let url = `http://localhost:8080/ipfs/${result[1]}`;
+                      console.log(`Url = ${url}`);
+                  } else {
+                    console.error(error);
+                  }
+                });
+              }
+          } else {
+            console.error(error);
+          }
+        });
 };

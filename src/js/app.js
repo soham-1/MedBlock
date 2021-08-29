@@ -9,7 +9,7 @@
 var web3;
 
 // var agentContractAddress = '0xE5f3e382Dda6eD87685e58BAAf4F7a11c44E5846';
-var agentContractAddress = '0x3b2F55DFca18eAAe4Ace906ac1F6ED5a1c30C93C';
+var agentContractAddress = '0x907535197050436D1e71102a4271110e83BeE453';
 // var agentContractAddress = '0xCFfa0c4e37256fd438697542457e3dd522489cd5';
 
 function connect(){
@@ -88,8 +88,74 @@ function connect(){
         {"constant":false,"inputs":[{"name":"_name","type":"string"},{"name":"_age","type":"uint256"},{"name":"_designation","type":"uint256"},{"name":"_hash","type":"string"}],"name":"add_agent","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},
         {"constant":false,"inputs":[{"name":"paddr","type":"address"},{"name":"_diagnosis","type":"uint256"},{"name":"_hash","type":"string"}],"name":"insurance_claim","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},
         {"constant":false,"inputs":[{"name":"name","type":"string"},{"name":"email","type":"string"}],"name":"add_insurer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},
-        {"constant":true, "inputs":[{"name":"patient_address","type":"address"},{"name":"_name","type":"string"},{"name":"_hash","type":"string"}], "name":"add_file_hash", "outputs":[{"name":"","type":"string[]"}], "payable":false,"stateMutability":"nonpayable","type":"function"},
-        {"constant":true, "inputs":[{"name":"patient_address","type":"address"}], "name":"get_patient_files", "outputs":[{"name":"","type":"string[]"}], "payable":false,"stateMutability":"nonpayable","type":"function"}
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "patient_address",
+                    "type": "address"
+                },
+                {
+                    "name": "_name",
+                    "type": "string"
+                },
+                {
+                    "name": "_hash",
+                    "type": "string"
+                }
+            ],
+            "name": "add_file_hash",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "padd",
+                    "type": "address"
+                }
+            ],
+            "name": "get_total_patient_files",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "padd",
+                    "type": "address"
+                },
+                {
+                    "name": "_index",
+                    "type": "uint256"
+                }
+            ],
+            "name": "get_file_from_index",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "string"
+                },
+                {
+                    "name": "",
+                    "type": "string"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        }
     ]`);
     AgentContract = web3.eth.contract(abi);
     contractInstance = AgentContract.at(agentContractAddress);
