@@ -24,6 +24,14 @@ contract Agent {
         string email;
     }
 
+    struct policy {
+        string title;
+        address [] clientlist;
+        uint amount_cover;
+        string policy_detail;
+        string policy_image;
+    }
+
     uint creditPool;
 
     address[] public patientList;
@@ -36,6 +44,7 @@ contract Agent {
     mapping (address => insurer) insurerInfo;
     // might not be necessary
     mapping (address => string) patientRecords;
+    mapping (address => policy) policyInfo;
 
 
 
@@ -71,6 +80,17 @@ contract Agent {
             return _name;
 
     }
+        function add_policy(string memory _title, uint _amount_cover, string memory _policy_detail, string memory _policy_image) public returns(string memory){
+        address addr = msg.sender;
+           policy memory p;
+            p.title = _title;
+            p.amount_cover= _amount_cover;
+            p.policy_detail= _policy_detail;
+            p.policy_image= _policy_image;
+            policyInfo[addr]=p;
+            return _title;
+
+    }
 
 
     function get_patient(address addr) view public returns (string memory , uint, uint[] memory , address, string memory ){
@@ -85,6 +105,16 @@ contract Agent {
     function get_doctor(address addr) view public returns (string memory , uint){
         // if(keccak256(doctorInfo[addr].name)==keccak256(""))revert();
         return (doctorInfo[addr].name, doctorInfo[addr].age);
+    }
+    function get_policy(address addr) view public returns (string memory, uint amount_cover, string memory, string memory){
+        // if(keccak256(doctorInfo[addr].name)==keccak256(""))revert();
+        return (policyInfo[addr].title, policyInfo[addr].amount_cover, policyInfo[addr].policy_detail,  policyInfo[addr].policy_image);
+    }
+    function add_policy_client(address addr, address client)  public{
+        policyInfo[addr].clientlist.push(client)-1;
+    }
+    function client_policy_list(address addr) view public returns(address[] memory){
+        return policyInfo[addr].clientlist;
     }
     function get_patient_doctor_name(address paddr, address daddr) view public returns (string memory , string memory ){
         return (patientInfo[paddr].name,doctorInfo[daddr].name);
