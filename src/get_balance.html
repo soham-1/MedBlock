@@ -86,7 +86,7 @@
                                 <a href="insurer/insurer_profile.html"> <i class="mr-1 flaticon-user-6"></i> Profile </a>
                             </li>
                             <li>
-                                <a href="accounting_dashboard.html">  <i class="flaticon-edit-3"></i>Add Policy </a>
+                                <a href="add_policy.html">  <i class="flaticon-edit-3"></i>Add Policy </a>
                             </li>
                             <li>
                                 <a href="analytics_dashboard.html"> <i class="mr-1 flaticon-email-fill-1"></i>  View Approvals </a>
@@ -122,11 +122,11 @@
             <div class="container">
                 <div class="page-header">
                     <div class="page-title">
-<h1>Hello Balance </h1>
-<label> Public Key</label>
+
+<label> Public Key - </label>
 <bold><label id="key">  </label>
 <br>
-<label>Balance</label>
+<label>Balance - </label>
 <bold><label id="balance"></label></bold>
                     </div>
                 </div>
@@ -165,7 +165,8 @@
       web3.eth.getBalance(key, function(error, result){
     if(!error){
         console.log(result.c[0])
-        balance=result.c[0];
+        balance=result.c[0]/10000;
+        document.getElementById('balance').innerHTML =balance + " ether";
     }
     else{
         console.error(error);
@@ -174,7 +175,8 @@
 
 
     //balance = web3.toDecimal(balance);
-     $("#balance").html(balance);
+
+
 
     }));
 

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>MedBlock</title>
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <style>
+        .container{
+            background-color: white;
+            margin-top: 35px;
+            color: black;
+        }
+    </style>
+</head>
+<body class="default-sidebar">
+
+    <!-- Tab Mobile View Header -->
+    <header class="tabMobileView header navbar fixed-top d-lg-none">
+        <div class="nav-toggle">
+                <a href="javascript:void(0);" class="nav-link sidebarCollapse" data-placement="bottom">
+                    <i class="flaticon-menu-line-2"></i>
+                </a>
+            <a href="index.html" class=""> </a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="nav-item d-lg-none">
+                <form class="form-inline justify-content-end" role="search">
+                    <input type="text" class="form-control search-form-control mr-3">
+                </form>
+            </li>
+        </ul>
+    </header>
+    <!-- Tab Mobile View Header -->
+
+    <!--  BEGIN NAVBAR  -->
+    <header class="header navbar fixed-top navbar-expand-sm">
+        <a href="javascript:void(0);" class="sidebarCollapse d-none d-lg-block" data-placement="bottom"><i class="flaticon-menu-line-2"></i></a>
+        <ul class="navbar-nav flex-row ml-lg-auto">
+
+
+
+
+        </ul>
+    </header>
+    <!--  END NAVBAR  -->
+
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container" id="container">
+
+
+        <!--  BEGIN SIDEBAR  -->
+
+        <div class="sidebar-wrapper sidebar-theme shadow-box-example theme-shadow-2 flex-center  block-2" id="insurer_sidebar">
+
+
+        </div>
+
+        <!--  END SIDEBAR  -->
+
+        <!--  BEGIN CONTENT PART  -->
+        <div id="content" class="main-content">
+            <div class="container">
+                <div class="page-header">
+                    <div class="page-title" id="add-policy">
+                        <h1>Add Policy </h1>
+                    <div>
+            <div class="mb-3 col-lg-12 mt-3">
+                <label for="title" class="form-label">Policy title</label>
+                <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" required autofocus>
+            </div>
+            <div class="mb-3 col-lg-12 mt-3">
+                <label for="amt" class="form-label">Amount Cover</label>
+                <input type="tel" class="form-control" id="amt" placeholder="Enter amt" name="amt" required autofocus>
+            </div>
+            <div class="">
+                <label class="control-label" for="details">Details:</label>
+            </div>
+            <div class="col-sm-10 col-lg-12">
+                <textarea class="form-control" rows="7" id="details" placeholder="Enter details to be added" name = "Details" style="width: inherit" required autofocus></textarea>
+                <!-- <input type="text" class="form-control" id="details" placeholder="Enter details to be added" name = "Details" style="width: inherit" required autofocus> -->
+            </div>
+            <div class="form-group">
+                <label for="policy_file">Select Policy doc </label>
+                <input type="file" class="form-control-file" id="policy_file" name="policy_file">
+            </div>
+            <button onClick="upload()" class="btn btn-primary">Submit</button>
+        </div>
+        <button onClick="displayHash()" class="btn btn-primary mt-4">View Policy</button>
+
+                    </div>
+
+                </div>
+          </div>
+          <div class="view_policy" id="view_policy">
+            <div class="card text-center">
+                <div class="card-header" >
+
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title"id="policy-title"></h5>
+                  <p class="card-text" id="policy-cover"></p>
+                  <p class="card-text" id="policy-detail"></p>
+                  <a href="" class="btn btn-primary" id="link-doc">View Document </a>
+                </div>
+
+              </div>
+        </div>
+  </div>
+  </div>
+
+    <!-- END MAIN CONTAINER -->
+
+
+
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="assets/js/libs/jquery-3.1.1.min.js"></script>
+    <script src="bootstrap/js/popper.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="plugins/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script>
+        $(document).ready(function() {
+            App.init();
+        });
+    </script>
+    <script src="assets/js/custom.js"></script>
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+    <script src="/js/web3.min.js"></script>
+    <script src="https://unpkg.com/ipfs-api/dist/index.min.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/ipfs-http-client@30.1.3/dist/index.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/insurer.js"></script>
+
+<script>
+    $('#view_policy').hide();
+    function upload() {
+    const reader = new FileReader();
+    const photo = document.getElementById("policy_file");
+    var title = document.getElementById("title").value;
+    var amt = document.getElementById("amt").value;
+    var details = document.getElementById("details").value;
+    reader.readAsArrayBuffer(photo.files[0]);
+
+    reader.onloadend = function() {
+      var b = Buffer(reader.result);
+
+      ipfs.add(b, (err, result) => { // Upload buffer to IPFS
+        if (!err) {
+          console.log(result);
+        }
+        if(err) {
+          console.log(err);
+          return;
+        }
+        let url = `http://localhost:8080/ipfs/${result[0].hash}`
+        console.log(`Url = ${url}`);
+        console.log(key);
+
+        console.log(String(result[0].hash));
+        var policy_im = result[0].hash;
+
+        var buffer = Buffer(details);
+
+        ipfs.files.add(buffer, (error, result) => {
+            if(error){
+                console.log(error)
+            }else{
+                console.log(result);
+
+            }
+        });
+        var ipfshash=result[0].hash;
+
+        contractInstance.add_policy(title, amt, details,policy_im, {gas: 1000000}, function(error, res){
+            if (!err) {
+                console.log("result is");
+                console.log(res);
+                alert("Policy Added");
+            } else {
+              console.error(error);
+            }
+        });
+      });
+    };
+
+}
+function displayHash() {
+                $('#add-policy').hide();
+                $('#view_policy').show();
+                contractInstance.get_policy.call(key, {gas: 1000000},function(error, result){
+                  if(!error) {
+                      console.log(result);
+                      let url = `http://localhost:8080/ipfs/${result[3]}`;
+                      var title=result[0];
+                      var amt= result[1];
+                      var details=result[2];
+                      document.getElementById('policy-title').innerHTML = "Policy-title- "+title;
+                      document.getElementById('policy-cover').innerHTML = "Amount-Cover- " +amt+"ethers";
+                      document.getElementById('policy-detail').innerHTML = "Policy Details- " +details;
+                      document.getElementById("link-doc").setAttribute("href",url);
+                      console.log(`Url = ${url}`);
+                  } else {
+                    console.error(error);
+                  }
+                });
+              }
+
+</script>
+
+</body>
+</html>
