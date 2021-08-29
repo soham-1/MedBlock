@@ -15,11 +15,9 @@ function login(){
                     location.href = "./patient.html";
                 }
             }
-
         } else {
-            console.log(error);
-            console.log("Invalid User!");
-            alert("invalid or unregistered user !");
+            console.log("error in get patient list");
+            console.log(error); 
         }
     });
 
@@ -28,13 +26,12 @@ function login(){
             var DoctorList = result;
             for(var i = 0; i < DoctorList.length; i++) {
                 if (publicKey.toLowerCase() == DoctorList[i]) {
-                    location.href = "./doctor.html?key=" + publicKey;
+                    location.href = "./doctor1.html";
                 }
             }
-
         } else {
+            console.log("error in get doctor list");
             console.log(error);
-            alert("invalid or unregistered user !");
         }
     });
     contractInstance.get_insurer_list(function(error, result){
@@ -51,6 +48,7 @@ function login(){
             $(".alert-warning").show();
         }
     });
+    console.log("user not found !");
 }
 
 
@@ -78,15 +76,19 @@ function addAgent(){
     contractInstance.get_patient_list({gas: 1000000},function(error, result){
         if(!error)
             PatientList = result;
-        else
+        else {
+            console.log("error in get patient list");
             console.error(error);
+        }
     });
 
     contractInstance.get_doctor_list({gas: 1000000},function(error, result){
         if(!error)
             DoctorList = result;
-        else
+        else {
+            console.log("error in get doctor list");
             console.error(error);
+        }
     });
 
     // contractInstance.get_insurer_list({gas: 1000000},function(error, result){
@@ -97,7 +99,7 @@ function addAgent(){
     //     });
 
     if (validPublicKey == false) {
-        $(".alert-warning").show();
+        alert('public key not valid !');
     }
     else {
         for(j = 0; j < PatientList.length; j++) {
@@ -115,11 +117,8 @@ function addAgent(){
                     validAgent = false;
             }
         }
-        console.log(validAgent);
+        console.log("is agent valid ? " + validAgent);
         if (validAgent == true) {
-            $(".alert-warning").hide()
-            $(".alert-info").hide();
-
             var ipfshash = "";
 
             if (designation == "0") {
@@ -134,9 +133,9 @@ Public Key: ${publicKey}
                 if(error){
                     console.log(error);
                 }else{
-                    console.log("result:"+result)
+                    console.log("result: "+result)
                     ipfshash = result[0].hash;
-                    console.log("Ipfs hash:"+ipfshash);
+                    console.log("Ipfs hash: "+ipfshash);
                     contractInstance.add_agent(name1, age, designation, ipfshash, {gas: 1000000}, (err, res) => {
                         if(!err){
                             location.replace("./patient.html");
@@ -151,7 +150,7 @@ Public Key: ${publicKey}
                 contractInstance.add_agent(name1, age, designation, ipfshash, {gas: 1000000}, (err, res) => {
                 if (!err) {
                     if (designation == "1") {
-                        location.replace("./doctor.html");
+                        location.replace("./doctor1.html");
                     }
 
                 } else

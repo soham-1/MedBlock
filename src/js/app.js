@@ -9,6 +9,7 @@
 var web3;
 
 var agentContractAddress = '0x3A1FBDc73065bAF267D2B6491DA4E8eEC93623Bd';
+
 //var agentContractAddress = '0x907535197050436D1e71102a4271110e83BeE453';
 
 

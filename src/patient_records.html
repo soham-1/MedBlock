@@ -13,13 +13,6 @@
     <!-- END GLOBAL MANDATORY STYLES -->
 
     <title></title>
-    <style>
-        .container{
-            background-color: white;
-            margin-top: 35px;
-            color: black;
-        }
-    </style>
 </head>
 
 <body class="default-sidebar">
@@ -63,7 +56,7 @@
             <div class="container">
 
 
-                <div>
+                <!-- <div>
                     <div class="mb-3 col-lg-3 mt-3">
                         <label for="Name" class="form-label">File Name</label>
                         <input type="text" class="form-control" id="name" placeholder="Enter name" name="Name" required autofocus>
@@ -75,7 +68,42 @@
                     </div>
                     <button onClick="upload()" class="btn btn-primary">Submit</button>
                 </div>
-                <button onClick="displayHash()" class="btn btn-primary mt-4">View files</button>
+                <button onClick="displayHash()" class="btn btn-primary mt-4">View files</button> -->
+
+
+                <div class="custom-center-content mx-auto bg-white col-lg-11 mt-2">
+
+                    <div class="custom-center-content mx-auto bg-white col-lg-10 mb-5">
+                        <div class="panel-heading mb-5">
+                            <h3 class="text-center mt-5 ">Doctor's list</h3>
+                        </div>
+                        <select class="form-select mb-3" aria-label="Default select example" id="doc_list">
+                            <option selected>-- Please Select a Doctor --</option>
+                        </select>
+                        <div class="panel-heading mb-5 text-center">
+                            <button class="btn btn-success btn-lg" onclick="grant_access()">Grant Access</button>
+                        </div>
+                    </div>
+
+
+                    <div class="custom-center-content mx-auto bg-white col-lg-10 mt-5">
+                        <div class="panel-heading mb-5">
+                            <h3 class="text-center">Current EMR access holders</h3>
+                        </div>
+                        <table class="table table-striped text-center mb-3">
+                            <thead>
+                            <tr>
+                                <th scope="col">Doctor</th>
+                                <th scope="col">Handle</th>
+                            </tr>
+                            </thead>
+                            <tbody id="table-body"></tbody>
+                        </table>
+                    </div>
+                
+
+
+
             </div>
 
         </div>
