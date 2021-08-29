@@ -192,14 +192,17 @@ contract Agent {
         patientInfo[paddr].record = _hash;
     }
 
-    function add_file_hash(address patient_address, string memory _name, string memory _hash) public returns (string[] memory) {
-        patientInfo[patient_address].file_hash.push(_hash);
-        patientInfo[patient_address].file_name.push(_name);
-        return patientInfo[patient_address].file_name;
+    function add_file_hash(address patient_address, string memory _name, string memory _hash) public {
+        patientInfo[patient_address].file_hash.push(_hash)-1;
+        patientInfo[patient_address].file_name.push(_name)-1;
     }
 
-    function get_patient_files(address patient_address) public returns (string[] memory) {
-        return patientInfo[patient_address].file_name;
+    function get_total_patient_files(address padd) public returns (uint) {
+        return patientInfo[padd].file_name.length;
+    }
+
+    function get_file_from_index(address padd, uint _index) public returns (string memory, string memory) {
+        return (patientInfo[padd].file_name[_index], patientInfo[padd].file_hash[_index]);
     }
 
 }

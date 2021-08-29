@@ -9,7 +9,7 @@
 var web3;
 
 var agentContractAddress = '0xb8023fdFbD9e1bd86a66D194dcAF7692F594a911';
-//var agentContractAddress = '0x3b2F55DFca18eAAe4Ace906ac1F6ED5a1c30C93C';
+//var agentContractAddress = '0x907535197050436D1e71102a4271110e83BeE453';
 
 
 function connect(){
@@ -18,29 +18,145 @@ function connect(){
         // User denied account access
         console.log(error);
     })
-    abi = JSON.parse(`[{"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"get_accessed_doctorlist_for_patient","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},
-    {"constant":false,"inputs":[{"name":"paddr","type":"address"},{"name":"daddr","type":"address"}],"name":"remove_patient","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},
-    {"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"doctorList","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},
-    {"constant":true,"inputs":[{"name":"paddr","type":"address"},{"name":"daddr","type":"address"}],"name":"get_patient_doctor_name","outputs":[{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},
-    {"constant":false,"inputs":[{"name":"daddr","type":"address"}],"name":"revoke_access","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},
-    {"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"get_patient","outputs":[{"name":"","type":"string"},{"name":"","type":"uint256"},{"name":"","type":"uint256[]"},{"name":"","type":"address"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},
-    {"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"get_doctor","outputs":[{"name":"","type":"string"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
-    {"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"insurerList","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},
-    {"constant":true,"inputs":[{"name":"paddr","type":"address"}],"name":"get_hash","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},
-    {"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"get_insurer","outputs":[{"name":"name","type":"string"},{"name":"email","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},
-    {"constant":false,"inputs":[{"name":"paddr","type":"address"}],"name":"accept_claim","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"patientList","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},
-    {"constant":false,"inputs":[{"name":"addr","type":"address"}],"name":"permit_access","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},
-    {"constant":true,"inputs":[],"name":"get_doctor_list","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},
-    {"constant":false,"inputs":[{"name":"iaddr","type":"address"},{"name":"_diagnosis","type":"uint256[]"}],"name":"select_insurer","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},
-    {"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"get_accessed_patientlist_for_doctor","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},
-    {"constant":true,"inputs":[],"name":"get_patient_list","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},
-    {"constant":true,"inputs":[],"name":"get_insurer_list","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},
-    {"constant":false,"inputs":[{"name":"_name","type":"string"},{"name":"_age","type":"uint256"},{"name":"_designation","type":"uint256"},{"name":"_hash","type":"string"}],"name":"add_agent","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},
-    {"constant":false,"inputs":[{"name":"paddr","type":"address"},{"name":"_diagnosis","type":"uint256"},{"name":"_hash","type":"string"}],"name":"insurance_claim","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},
-    {"constant":false,"inputs":[{"name":"name","type":"string"},{"name":"email","type":"string"}],"name":"add_insurer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},
-    {"constant":true, "inputs":[{"name":"patient_address","type":"address"},{"name":"_name","type":"string"},{"name":"_hash","type":"string"}], "name":"add_file_hash", "outputs":[{"name":"_name","type":"string"}], "payable":false,"stateMutability":"nonpayable","type":"function"},
-    {"constant":true, "inputs":[{"name":"patient_address","type":"address"}], "name":"get_patient_files", "outputs":[{"name":"","type":"string[]"}], "payable":false,"stateMutability":"view","type":"function"}]`);
-
+    abi = JSON.parse(`[
+        {
+            "constant":true,
+            "inputs":[{"name":"addr","type":"address"}],
+            "name":"get_accessed_doctorlist_for_patient",
+            "outputs":[{"name":"","type":"address[]"}],
+            "payable":false,
+            "stateMutability":"view",
+            "type":"function"},
+        {
+            "constant":false,
+            "inputs":[{"name":"paddr","type":"address"},
+            {"name":"daddr","type":"address"}],
+            "name":"remove_patient",
+            "outputs":[],
+            "payable":false,
+            "stateMutability":"nonpayable",
+            "type":"function"
+        },
+        {
+            "constant":true,
+            "inputs":[{"name":"","type":"uint256"}],
+            "name":"doctorList",
+            "outputs":[{"name":"","type":"address"}],
+            "payable":false,
+            "stateMutability":"view",
+            "type":"function"
+        },
+        {
+            "constant":true,
+            "inputs":[{"name":"paddr","type":"address"},{"name":"daddr","type":"address"}],
+            "name":"get_patient_doctor_name",
+            "outputs":[{"name":"","type":"string"},{"name":"","type":"string"}],
+            "payable":false,
+            "stateMutability":"view",
+            "type":"function"
+        },
+        {
+            "constant":false,
+            "inputs":[{"name":"daddr","type":"address"}],
+            "name":"revoke_access",
+            "outputs":[],
+            "payable":true,
+            "stateMutability":"payable",
+            "type":"function"
+        },
+        {
+            "constant":true,
+            "inputs":[{"name":"addr","type":"address"}],
+            "name":"get_patient",
+            "outputs":[{"name":"","type":"string"},{"name":"","type":"uint256"},{"name":"","type":"uint256[]"},{"name":"","type":"address"},{"name":"","type":"string"}],
+            "payable":false,
+            "stateMutability":"view",
+            "type":"function"
+        },
+        {"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"get_doctor","outputs":[{"name":"","type":"string"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
+        {"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"insurerList","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},
+        {"constant":true,"inputs":[{"name":"paddr","type":"address"}],"name":"get_hash","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},
+        {"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"get_insurer","outputs":[{"name":"","type":"string"},{"name":"","type":"uint256"},{"name":"","type":"address[]"},{"name":"","type":"address[]"},{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},
+        {"constant":false,"inputs":[{"name":"paddr","type":"address"}],"name":"accept_claim","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},
+        {"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"patientList","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},
+        {"constant":false,"inputs":[{"name":"addr","type":"address"}],"name":"permit_access","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},
+        {"constant":true,"inputs":[],"name":"get_doctor_list","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},
+        {"constant":false,"inputs":[{"name":"iaddr","type":"address"},{"name":"_diagnosis","type":"uint256[]"}],"name":"select_insurer","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},
+        {"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"get_accessed_patientlist_for_doctor","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},
+        {"constant":true,"inputs":[],"name":"get_patient_list","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},
+        {"constant":true,"inputs":[],"name":"get_insurer_list","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},
+        {"constant":false,"inputs":[{"name":"_name","type":"string"},{"name":"_age","type":"uint256"},{"name":"_designation","type":"uint256"},{"name":"_hash","type":"string"}],"name":"add_agent","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},
+        {"constant":false,"inputs":[{"name":"paddr","type":"address"},{"name":"_diagnosis","type":"uint256"},{"name":"_hash","type":"string"}],"name":"insurance_claim","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},
+        {"constant":false,"inputs":[{"name":"name","type":"string"},{"name":"email","type":"string"}],"name":"add_insurer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "patient_address",
+                    "type": "address"
+                },
+                {
+                    "name": "_name",
+                    "type": "string"
+                },
+                {
+                    "name": "_hash",
+                    "type": "string"
+                }
+            ],
+            "name": "add_file_hash",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "padd",
+                    "type": "address"
+                }
+            ],
+            "name": "get_total_patient_files",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "padd",
+                    "type": "address"
+                },
+                {
+                    "name": "_index",
+                    "type": "uint256"
+                }
+            ],
+            "name": "get_file_from_index",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "string"
+                },
+                {
+                    "name": "",
+                    "type": "string"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        }
+    ]`);
     AgentContract = web3.eth.contract(abi);
     contractInstance = AgentContract.at(agentContractAddress);
     web3.eth.defaultAccount = web3.currentProvider.selectedAddress;
