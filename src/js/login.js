@@ -49,6 +49,7 @@ function login(){
         }
     });
     console.log("user not found !");
+    alert("user not found !");
 }
 
 
