@@ -8,8 +8,8 @@
 
 var web3;
 
-var agentContractAddress = '0xb8023fdFbD9e1bd86a66D194dcAF7692F594a911';
-//var agentContractAddress = '0x907535197050436D1e71102a4271110e83BeE453';
+// var agentContractAddress = '0xb8023fdFbD9e1bd86a66D194dcAF7692F594a911';
+var agentContractAddress = '0x907535197050436D1e71102a4271110e83BeE453';
 
 
 function connect(){
