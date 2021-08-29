@@ -8,7 +8,7 @@
 
 var web3;
 
-var agentContractAddress = '0x3A1FBDc73065bAF267D2B6491DA4E8eEC93623Bd';
+var agentContractAddress = '0x7AAD44Fb98726f9B59e2C291d4175a368a5d5FEF';
 
 //var agentContractAddress = '0x907535197050436D1e71102a4271110e83BeE453';
 
@@ -268,6 +268,97 @@ function connect(){
             ],
             "payable": false,
             "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "addr",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "insurer_addr",
+                    "type": "address"
+                }
+            ],
+            "name": "add_patient_insurer",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "addr",
+                    "type": "address"
+                }
+            ],
+            "name": "get_patient_insurer",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "iaddr",
+                    "type": "address"
+                }
+            ],
+            "name": "revoke_insurer_access",
+            "outputs": [],
+            "payable": true,
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "paddr",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "iaddr",
+                    "type": "address"
+                }
+            ],
+            "name": "remove_insurer_acs",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "addr",
+                    "type": "address"
+                }
+            ],
+            "name": "permit_access_insurer",
+            "outputs": [],
+            "payable": true,
+            "stateMutability": "payable",
             "type": "function"
         }
     ]`);

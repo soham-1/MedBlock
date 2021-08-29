@@ -86,7 +86,7 @@ function get_doctor_list() {
       if(!error) {
           result.forEach(doctor => {
               console.log(doctor);
-              
+
               contractInstance.get_doctor.call(doctor, {gas: 1000000}, function(err, res){
                 if (!err) {
                   console.log(res[0]);
@@ -96,7 +96,7 @@ function get_doctor_list() {
                   option.value = doctor;
                   select_menu.appendChild(option);
                     }
-              });              
+              });
           });
       } else {
         console.error(error);

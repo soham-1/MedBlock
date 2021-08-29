@@ -11,6 +11,8 @@ contract Agent {
         string record;
         string[] file_name;
         string[] file_hash;
+        address insurer_addr;
+        address[] insurerAccessList;
     }
 
     struct doctor {
@@ -22,6 +24,7 @@ contract Agent {
         string name;
         address [] clientlist;
         string email;
+        address [] clientAccessList;
     }
 
     struct policy {
@@ -101,6 +104,13 @@ contract Agent {
         // if(keccak256(patientInfo[addr].name) == keccak256(""))revert();
         return (insurerInfo[addr].name, insurerInfo[addr].email);
     }
+    function add_patient_insurer(address addr, address insurer_addr) public{
+            patientInfo[addr].insurer_addr=insurer_addr;
+            insurerInfo[insurer_addr].clientlist.push(addr) -1;
+        }
+    function get_patient_insurer(address addr) view public returns(address){
+            return patientInfo[addr].insurer_addr;
+        }
 
     function get_doctor(address addr) view public returns (string memory , uint){
         // if(keccak256(doctorInfo[addr].name)==keccak256(""))revert();
@@ -127,6 +137,15 @@ contract Agent {
 
         doctorInfo[addr].patientAccessList.push(msg.sender)-1;
         patientInfo[msg.sender].doctorAccessList.push(addr)-1;
+
+    }
+    function permit_access_insurer(address addr) payable public {
+        require(msg.value == 2 ether);
+
+        creditPool += 2;
+
+        insurerInfo[addr].clientAccessList.push(msg.sender)-1;
+        patientInfo[msg.sender].insurerAccessList.push(addr)-1;
 
     }
 
@@ -184,6 +203,10 @@ contract Agent {
         remove_element_in_array(doctorInfo[daddr].patientAccessList, paddr);
         remove_element_in_array(patientInfo[paddr].doctorAccessList, daddr);
     }
+    function remove_insurer_acs(address paddr, address iaddr) public {
+        remove_element_in_array(insurerInfo[iaddr].clientAccessList, paddr);
+        remove_element_in_array(patientInfo[paddr].insurerAccessList, iaddr);
+    }
 
     function get_accessed_doctorlist_for_patient(address addr) public view returns (address[] memory )
     {
@@ -198,6 +221,11 @@ contract Agent {
 
     function revoke_access(address daddr) public payable{
         remove_patient(msg.sender,daddr);
+        msg.sender.transfer(2 ether);
+        creditPool -= 2;
+    }
+    function revoke_insurer_access(address iaddr) public payable{
+        remove_insurer_acs(msg.sender,iaddr);
         msg.sender.transfer(2 ether);
         creditPool -= 2;
     }

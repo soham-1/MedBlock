@@ -1,31 +1,136 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Bootstrap CSS -->
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <title></title>
+</head>
+
+<body class="default-sidebar">
+
+    <!-- Tab Mobile View Header -->
+    <header class="tabMobileView header navbar fixed-top d-lg-none">
+        <div class="nav-toggle">
+                <a href="javascript:void(0);" class="nav-link sidebarCollapse" data-placement="bottom">
+                    <i class="flaticon-menu-line-2"></i>
+                </a>
+            <a href="index.html" class=""> </a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="nav-item d-lg-none">
+                <form class="form-inline justify-content-end" role="search">
+                    <input type="text" class="form-control search-form-control mr-3">
+                </form>
+            </li>
+        </ul>
+    </header>
+    <!-- Tab Mobile View Header -->
+
+    <!--  BEGIN NAVBAR  -->
+    <header class="header navbar fixed-top navbar-expand-sm">
+        <a href="javascript:void(0);" class="sidebarCollapse d-none d-lg-block" data-placement="bottom"><i class="flaticon-menu-line-2"></i></a>
+        <ul class="navbar-nav flex-row ml-lg-auto">
+        </ul>
+    </header>
+
+    <!--  END NAVBAR  -->
+
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container" id="container">
+
+        <!--  BEGIN SIDEBAR  -->
+        <div class="sidebar-wrapper sidebar-theme shadow-box-example theme-shadow-2 flex-center  block-2" id="patient_sidebar"></div>
+        <!--  END SIDEBAR  -->
+
+        <!--  BEGIN CONTENT PART  -->
+        <div id="content" class="main-content">
+            <div class="container">
+
+              <div class="custom-center-content mx-auto bg-white col-lg-12 mt-2">
+                <label> Public Key -  </label>
+                <bold><label id="key">  </label>
+                <br>
+<label>  Name -  </label>
+<bold><label id="name">  </label>
+<br>
+<label>Age - </label>
+<bold><label id="age"></label></bold>
+            </div>
 
 
-  </head>
-  <body>
-    <div id="include-content">
-
-    </div>
-<div class="container">
-    profile Page
-</div>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script>
-    $(function(){
-      $("#include-content").load("patient.html");
-    });
-</script>
 
 
-  </body>
+
+            </div>
+
+        </div>
+  </div>
+
+    <!-- END MAIN CONTAINER -->
+
+
+
+
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="assets/js/libs/jquery-3.1.1.min.js"></script>
+    <script src="bootstrap/js/popper.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="plugins/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+
+    <script src="/js/web3.min.js"></script>
+    <script src="https://unpkg.com/ipfs-api/dist/index.min.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/ipfs-http-client@30.1.3/dist/index.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/patient_profile.js"></script>
+    <script>
+      var url_string = window.location.href;
+var url = new URL(url_string);
+var key ;
+
+
+$(window).on('load',(function() {
+   connect();
+   key = web3.currentProvider.selectedAddress;
+   key = key.toLowerCase();
+   console.log(key);
+
+   var name = "";
+
+
+   // print patient details and insurer details (if exists). If insurer does not exist show the buy insurance panel
+   contractInstance.get_patient.call(key, {gas: 1000000}, function(error, result){
+
+       if(!error){
+        console.log(result);
+           _name = result[0];
+           var b = result[1].c[0];
+           console.log(b);
+          document.getElementById('name').innerHTML = _name;
+           $("#age").html(b);
+           $("#key").html(key);
+          }
+          else{
+           console.log(error);
+          }
+   });
+  }));
+
+
+  </script>
+
+</body>
 </html>
