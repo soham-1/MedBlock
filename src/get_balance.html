@@ -75,7 +75,7 @@
 
                 <ul class="list-unstyled menu-categories" id="accordionExample">
                     <li class="menu">
-                        <a href="#dashboard" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+                        <a href="insurer.html" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
                                 <i class="flaticon-computer-6 ml-3"></i>
                                 <span>Dashboard</span>
@@ -101,7 +101,7 @@
                                 <a href="stock_market_dashboard.html">  <i class="flaticon-chart-3"></i>Statistics </a>
                             </li>
                             <li>
-                                <a href="../get_balance.html"> <i class="flaticon-bitcoin-circle"></i> Check Balance </a>
+                                <a href="cryptocurrency_dashboard.html"> <i class="flaticon-bitcoin-circle"></i> Check Balance </a>
                             </li>
                             <li>
                               <a href="../index.html">  <i class="mr-1 flaticon-power-button"></i>Logout </a>
@@ -122,12 +122,12 @@
             <div class="container">
                 <div class="page-header">
                     <div class="page-title">
-<h1>Hello Profile page </h1>
-<label> Company Name </label>
-<bold><label id="name">  </label>
+<h1>Hello Balance </h1>
+<label> Public Key</label>
+<bold><label id="key">  </label>
 <br>
-<label>Email</label>
-<bold><label id="email"></label></bold>
+<label>Balance</label>
+<bold><label id="balance"></label></bold>
                     </div>
                 </div>
           </div>
@@ -159,29 +159,23 @@
      key = web3.currentProvider.selectedAddress;
      key = key.toLowerCase();
      console.log(key);
-
-     var name = "";
-     var email = "";
-
-
-     // print patient details and insurer details (if exists). If insurer does not exist show the buy insurance panel
-     contractInstance.get_insurer.call(key, {gas: 1000000}, function(error, result){
-         console.log("Insurer Data Result:"+result);
-         if(!error){
-             _name = result[0];
-             var b = result[1];
-
-             console.log(_name);
-             console.log(b);
+     $("#key").html(key);
+     var publickey = key;
+     var balance ;
+      web3.eth.getBalance(key, function(error, result){
+    if(!error){
+        console.log(result.c[0])
+        balance=result.c[0];
+    }
+    else{
+        console.error(error);
+    }
+})
 
 
-            document.getElementById('name').innerHTML =_name;
-             $("#email").html(b);
-            }
-            else{
-             console.log(error);
-            }
-     });
+    //balance = web3.toDecimal(balance);
+     $("#balance").html(balance);
+
     }));
 
 
