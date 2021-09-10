@@ -8,8 +8,8 @@
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/plugins.css" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
 
     <title></title>
@@ -78,11 +78,11 @@
 <br>
 <label>Email - </label>
 <bold><label id="email"></label></bold>
-              </div>
+              <!-- </div>
 
                 <button class="btn btn-success btn-lg mb-3" onclick="grant_access()" id="grant">Grant Access</button>
                 <button class="btn btn-danger btn-lg mx-4 mb-4" onclick="revoke_access()" id="revoke">Grant Access</button>
-        </div>
+        </div> -->
         <div class="view_policy" id="view_policy">
             <div class="card text-center">
 
@@ -124,23 +124,23 @@
 
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-    <script src="assets/js/libs/jquery-3.1.1.min.js"></script>
-    <script src="bootstrap/js/popper.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="plugins/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="assets/js/app.js"></script>
-    <script src="assets/js/custom.js"></script>
+    <script src="../assets/js/libs/jquery-3.1.1.min.js"></script>
+    <script src="../bootstrap/js/popper.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../plugins/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/custom.js"></script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
 
-    <script src="/js/web3.min.js"></script>
+    <script src="../js/web3.min.js"></script>
     <script src="https://unpkg.com/ipfs-api/dist/index.min.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/ipfs-http-client@30.1.3/dist/index.js"></script>
 
-    <script src="js/app.js"></script>
-    <script src="js/patient_profile.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/patient/patient_profile.js"></script>
     <script>
-        $('title').load('common/title.html');
-$("#patient_sidebar").load('common/patient_sidebar.html');
+        $('title').load('../common/title.html');
+$("#patient_sidebar").load('../common/patient_sidebar.html');
 
 var key;
 
@@ -151,6 +151,7 @@ $(window).on('load', function() {
     key = key.toLocaleLowerCase();
     var insurerkey;
     $('#revoke').hide();
+    $('#access_table').hide();
     contractInstance.get_patient_insurer.call(key ,{gas: 1000000},function(error, result){
         if(!error) {
                 //console.log(result);

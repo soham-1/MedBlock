@@ -1,5 +1,5 @@
-$('title').load('common/title.html');
-$("#patient_sidebar").load('common/patient_sidebar.html');
+$('title').load('../common/title.html');
+$("#patient_sidebar").load('../common/patient_sidebar.html');
 
 var key;
 var ipfs = window.IpfsApi('localhost', '5001');
