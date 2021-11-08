@@ -8,7 +8,7 @@
 
 var web3;
 
-var agentContractAddress = '0x7AAD44Fb98726f9B59e2C291d4175a368a5d5FEF';
+var agentContractAddress = '0xA284661024374F94490a760E805CE09E32AB84cC';
 
 //var agentContractAddress = '0x89EeD0e604F269239937821493CeE7319b2B317a';
 
@@ -157,6 +157,27 @@ function connect(){
             "stateMutability": "nonpayable",
             "type": "function"
         },
+        {
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "get_accessed_patientlist_for_insurer",
+		"outputs": [
+			{
+				"internalType": "address[]",
+				"name": "",
+				"type": "address[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
         {
             "constant": false,
             "inputs": [

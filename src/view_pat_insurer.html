@@ -17,8 +17,6 @@
         .container{
             background-color: white;
             margin-top: 20px;
-
-
         }
     </style>
 </head>
@@ -81,7 +79,7 @@
               </div>
 
                 <button class="btn btn-success btn-lg mb-3" onclick="grant_access()" id="grant">Grant Access</button>
-                <button class="btn btn-danger btn-lg mx-4 mb-4" onclick="revoke_access()" id="revoke">Grant Access</button>
+                <button class="btn btn-danger btn-lg mx-4 mb-4" onclick="revoke_access()" id="revoke">Revoke Access</button>
         </div>
         <div class="view_policy" id="view_policy">
             <div class="card text-center">
@@ -93,7 +91,7 @@
           <a href="" class="btn btn-info" id="link-doc">View Document </a>
 
         </div>
-        <h1 style="display: block;color:white">Hello</h1>
+
 
       </div>
 </div>
@@ -143,9 +141,10 @@
 $("#patient_sidebar").load('common/patient_sidebar.html');
 
 var key;
-
+var insurer_key;
 
 $(window).on('load', function() {
+  $('#access_table').hide();
     connect();
     key = web3.currentProvider.selectedAddress;
     key = key.toLocaleLowerCase();
@@ -155,6 +154,7 @@ $(window).on('load', function() {
         if(!error) {
                 //console.log(result);
                 insurerkey=result;
+                insurer_key=insurerkey
                 $("#key").html(insurerkey);
             contractInstance.get_insurer.call(insurerkey, {gas: 1000000}, function(error, result){
 
@@ -200,7 +200,8 @@ $(window).on('load', function() {
 function grant_access() {
     $('#grant').hide();
     $('#revoke').show();
-  var insurer_key = document.getElementById('key').value;
+    $('#access_table').show();
+  // var insurer_key = document.getElementById('key').value;
   console.log("selected Insurer key to grant access : " + insurer_key);
   contractInstance.permit_access_insurer.sendTransaction(insurer_key, {from: key, gas: 1000000, value: web3.toWei(2, 'ether')}, function(err) {
     if(!err) location.reload();
@@ -210,6 +211,7 @@ function grant_access() {
 function revoke_access() {
     $('#grant').hide();
     $('#revoke').show();
+    $('#access_table').show();
   var insurer_key = document.getElementById('key').value;
   contractInstance.get_accessed_doctorlist_for_patient.call(key, {gas: 1000000}, function(error, result) {
     if (!error) {

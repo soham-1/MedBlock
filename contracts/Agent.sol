@@ -59,7 +59,7 @@ contract Agent {
             p.name = _name;
             p.age = _age;
             p.record = _hash;
-            patientInfo[msg.sender] = p;
+            patientInfo[addr] = p;
             patientList.push(addr)-1;
             return _name;
         }
@@ -217,7 +217,10 @@ contract Agent {
     {
         return doctorInfo[addr].patientAccessList;
     }
-
+    function get_accessed_patientlist_for_insurer(address addr) public view returns (address[] memory)
+    {
+        return insurerInfo[addr].clientAccessList;
+    }
 
     function revoke_access(address daddr) public payable{
         remove_patient(msg.sender,daddr);
@@ -244,6 +247,9 @@ contract Agent {
 
     function get_hash(address paddr) public view returns(string memory ){
         return patientInfo[paddr].record;
+    }
+    function get_accessed_insurerlist_patient(address addr) public view returns(address[] memory){
+        return patientInfo[addr].insurerAccessList;
     }
 
     function set_hash(address paddr, string memory _hash) internal {
