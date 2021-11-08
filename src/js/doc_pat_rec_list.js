@@ -29,6 +29,7 @@ $(window).on('load', function() {
            }
     });
     populate_patient_rec_list();
+    populate_patient_bill_list()
 
 });
 

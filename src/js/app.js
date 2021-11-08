@@ -7,9 +7,9 @@
 // }
 
 var web3;
- 
-// var agentContractAddress = '0xA284661024374F94490a760E805CE09E32AB84cC';
-var agentContractAddress = '0xcA16f10e4fE9C6B99aC2581116FE496248F519bC';
+
+var agentContractAddress = '0x38e2a426ce5eCB2115aFF1fB732B4c273AFB7617';
+//var agentContractAddress = '0xcA16f10e4fE9C6B99aC2581116FE496248F519bC';
 
 
 function connect(){
