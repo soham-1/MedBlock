@@ -12,7 +12,7 @@ function login(){
             var PatientList = result;
             for(var i = 0; i < PatientList.length; i++) {
                 if (publicKey.toLowerCase() == PatientList[i]) {
-                    location.href = "./patient.html";
+                    location.href = "./patient/patient_profile.html";
                 }
             }
         } else {
@@ -26,7 +26,8 @@ function login(){
             var DoctorList = result;
             for(var i = 0; i < DoctorList.length; i++) {
                 if (publicKey.toLowerCase() == DoctorList[i]) {
-                    location.href = "./doctor1.html";
+                    location.href = "./doctor_profile.html";
+                    user_found = true;
                 }
             }
         } else {
@@ -40,6 +41,7 @@ function login(){
             for(var i = 0; i < InsurerList.length; i++) {
                 if (publicKey.toLowerCase() == InsurerList[i]) {
                     location.href = "./insurer.html?key=" + publicKey;
+                    user_found = true;
                 }
             }
 
@@ -137,7 +139,7 @@ Public Key: ${publicKey}
                     console.log("Ipfs hash: "+ipfshash);
                     contractInstance.add_agent(name1, age, designation, ipfshash, {gas: 1000000}, (err, res) => {
                         if(!err){
-                            location.replace("./patient.html");
+                            location.replace("./patient/patient_profile.html");
                         }else{
                             console.log(err);
                         }
@@ -149,7 +151,7 @@ Public Key: ${publicKey}
                 contractInstance.add_agent(name1, age, designation, ipfshash, {gas: 1000000}, (err, res) => {
                 if (!err) {
                     if (designation == "1") {
-                        location.replace("./doctor1.html");
+                        location.replace("./doctor_profile.html");
                     }
 
                 } else
