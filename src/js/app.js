@@ -7,8 +7,9 @@
 // }
 
 var web3;
-
-var agentContractAddress = '0xA284661024374F94490a760E805CE09E32AB84cC';
+ 
+// var agentContractAddress = '0xA284661024374F94490a760E805CE09E32AB84cC';
+var agentContractAddress = '0xcA16f10e4fE9C6B99aC2581116FE496248F519bC';
 
 
 function connect(){
@@ -378,6 +379,83 @@ function connect(){
             "outputs": [],
             "payable": true,
             "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "patient_address",
+                    "type": "address"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_name",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_hash",
+                    "type": "string"
+                }
+            ],
+            "name": "add_bill_hash",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "padd",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_index",
+                    "type": "uint256"
+                }
+            ],
+            "name": "get_bill_from_index",
+            "outputs": [
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "padd",
+                    "type": "address"
+                }
+            ],
+            "name": "get_total_patient_bills",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
             "type": "function"
         }
     ]`);

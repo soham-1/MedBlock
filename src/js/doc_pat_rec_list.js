@@ -59,3 +59,31 @@ function populate_patient_rec_list() {
         }
     });
 }
+
+function populate_patient_bill_list() {
+    contractInstance.get_total_patient_bills.call(patient_key, {gas: 1000000}, function(error, result){
+        if (!error) {
+            var table = document.getElementById("bill-table-body");
+            var len = result.c[0];
+            for (var j=0; j<len; j++) {
+                contractInstance.get_bill_from_index.call(patient_key, j, {gas: 1000000}, function(err, res) {
+                    if (!err) {
+                        file_name = res[0];
+                        file_hash = res[1];
+                        console.log(res);
+                        file_url = `http://localhost:8080/ipfs/${file_hash}`;
+                        let row = document.createElement('tr');
+                        let file_cell = document.createElement('td');
+                        let view_button = document.createElement('td');
+                        view_button.innerHTML = `<button class="btn btn-primary rounded-pill" onclick="location.href='${file_url}'">View</button>`;
+                        let name = document.createTextNode(file_name);
+                        file_cell.append(name);
+                        row.appendChild(file_cell);
+                        row.appendChild(view_button);
+                        table.appendChild(row);
+                    }
+                });
+            }
+        }
+    });
+}

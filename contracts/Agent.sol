@@ -11,6 +11,8 @@ contract Agent {
         string record;
         string[] file_name;
         string[] file_hash;
+        string[] bill_name;
+        string[] bill_hash;
         address insurer_addr;
         address[] insurerAccessList;
     }
@@ -267,6 +269,19 @@ contract Agent {
 
     function get_file_from_index(address padd, uint _index) public returns (string memory, string memory) {
         return (patientInfo[padd].file_name[_index], patientInfo[padd].file_hash[_index]);
+    }
+
+    function add_bill_hash(address patient_address, string memory _name, string memory _hash) public {
+        patientInfo[patient_address].bill_hash.push(_hash)-1;
+        patientInfo[patient_address].bill_name.push(_name)-1;
+    }
+
+    function get_total_patient_bills(address padd) public returns (uint) {
+        return patientInfo[padd].bill_hash.length;
+    }
+
+    function get_bill_from_index(address padd, uint _index) public returns (string memory, string memory) {
+        return (patientInfo[padd].bill_name[_index], patientInfo[padd].bill_hash[_index]);
     }
 
 }
