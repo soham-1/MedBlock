@@ -1,5 +1,5 @@
 $('title').load('common/title.html');
-
+$("#insurer_sidebar").load('common/insurer_sidebar.html');
 var key;
 var ipfs = window.IpfsApi('localhost', '5001');
 
@@ -30,11 +30,16 @@ function populate_patient_list() {
                             let cell_data = document.createElement('td');
                             let view_button = document.createElement('td');
                             view_button.innerHTML = `<button class="btn btn-primary rounded-pill" id="${patientAddress}" onclick="location.href='./doc_pat_rec_list.html?key=${patientAddress}'">View history</button>`;
+                            let policy_detail = document.createElement('td');
+                            policy_detail.innerHTML = `<button class="btn btn-primary rounded-pill" id="${patientAddress}" onclick="location.href='./doc_pat_rec_list.html'">Policy detail</button>`;
+                            let approve = document.createElement('td');
+                            approve.innerHTML = `<button class="btn btn-success rounded-pill" id="${patientAddress}" onclick="location.href='./doc_pat_rec_list.html'">Approve</button>`;
                             let name = document.createTextNode(res[0]);
                             cell_data.appendChild(name);
                             row.appendChild(cell_data);
                             row.appendChild(view_button);
-                            row.appendChild(upload_button);
+                            row.appendChild(policy_detail);
+                            row.appendChild(approve);
                             table.appendChild(row);
                         } else {
                             console.log("error in get_patient");

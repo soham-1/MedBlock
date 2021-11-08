@@ -176,6 +176,27 @@ function connect(){
 		"stateMutability": "view",
 		"type": "function"
 	},
+    {
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "get_accessed_insurerlist_patient",
+		"outputs": [
+			{
+				"internalType": "address[]",
+				"name": "",
+				"type": "address[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
         {
             "constant": false,
             "inputs": [
