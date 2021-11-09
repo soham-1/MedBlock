@@ -203,11 +203,12 @@ function displayHash() {
                         total_len = result.c[0];
                         var policy_count = 0;
                         for (var j=0; j<total_len; j++) {
+                            console.log("j " + j);
                         contractInstance.get_policy_from_index.call(j, {gas: 1000000},function(error, result){
                             if(!error) {
-                                console.log(key + result[0]);
                                 if (key == result[0]) {
                                     policy_count++;
+                                    console.log("count" + policy_count);
                                     let url = `http://localhost:8080/ipfs/${result[4]}`;
                                     var title=result[1];
                                     var amt= result[2];
@@ -254,19 +255,30 @@ function displayHash() {
 
                                     document.getElementById('view_policy').appendChild(card);
                                 }
+                                console.log("count inside " + j+ " " + policy_count );
+                                if (j == total_len && policy_count == 0 && document.getElementById('view_policy').childElementCount == 0) {
+                                    var div = document.createElement('div');
+                                    div.className = "h1";
+                                    div.innerHTML = "No Policies added yet !";
+                                    document.getElementById('view_policy').appendChild(div);
+                                }
                                 // let url = `http://localhost:8080/ipfs/${result[1]}`;
                                 // console.log(`Url = ${url}`);
                             } else {
                             console.error(error);
                             }
                         });
+                        // console.log("count inside " + policy_count + " " + j);
+                        // if (j == total_len-1 && policy_count == 0) {
+                        //     var div = document.createElement('div');
+                        //     div.className = "h1";
+                        //     div.innerHTML = "No Policies added yet !";
+                        //     document.getElementById('view_policy').appendChild(div);
+                        // }
                         }
-                        if (policy_count == 0) {
-                            var div = document.createElement('div');
-                            div.className = "h1";
-                            div.innerHTML = "No Policies added yet !";
-                            document.getElementById('view_policy').appendChild(div);
-                        }
+                        
+                        console.log("count outside " + policy_count);
+                        
                     } else {
                     console.error(error);
                     }
