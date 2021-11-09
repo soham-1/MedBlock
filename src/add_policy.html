@@ -85,7 +85,6 @@
             </div>
             <div class="col-sm-10 col-lg-12">
                 <textarea class="form-control" rows="7" id="details" placeholder="Enter details to be added" name = "Details" style="width: inherit" required autofocus></textarea>
-                <!-- <input type="text" class="form-control" id="details" placeholder="Enter details to be added" name = "Details" style="width: inherit" required autofocus> -->
             </div>
             <div class="form-group">
                 <label for="policy_file">Select Policy doc </label>
@@ -239,11 +238,6 @@ function displayHash() {
                                     view_doc.innerHTML = "View Document";
                                     view_doc.setAttribute("href",url);
 
-                                    // document.getElementById('policy-title').innerHTML = "Policy-title- "+title;
-                                    // document.getElementById('policy-cover').innerHTML = "Amount-Cover- " +amt+"ethers";
-                                    // document.getElementById('policy-detail').innerHTML = "Policy Details- " +details;
-                                    // document.getElementById("link-doc").setAttribute("href",url);
-
                                     card_body.appendChild(card_title);
                                     card_body.appendChild(policy_cover);
                                     card_body.appendChild(policy_detail);
@@ -262,21 +256,17 @@ function displayHash() {
                                     div.innerHTML = "No Policies added yet !";
                                     document.getElementById('view_policy').appendChild(div);
                                 }
-                                // let url = `http://localhost:8080/ipfs/${result[1]}`;
-                                // console.log(`Url = ${url}`);
                             } else {
                             console.error(error);
                             }
                         });
-                        // console.log("count inside " + policy_count + " " + j);
-                        // if (j == total_len-1 && policy_count == 0) {
-                        //     var div = document.createElement('div');
-                        //     div.className = "h1";
-                        //     div.innerHTML = "No Policies added yet !";
-                        //     document.getElementById('view_policy').appendChild(div);
-                        // }
                         }
-                        
+                        if (total_len == 0) {
+                            var div = document.createElement('div');
+                            div.className = "h1";
+                            div.innerHTML = "No Policies added yet !";
+                            document.getElementById('view_policy').appendChild(div);
+                        }
                         console.log("count outside " + policy_count);
                         
                     } else {

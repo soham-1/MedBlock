@@ -9,7 +9,7 @@
 var web3;
 
 // var agentContractAddress = '0x38e2a426ce5eCB2115aFF1fB732B4c273AFB7617';
-var agentContractAddress = '0x4e622423277c727204db218ACb3a8418527c6c37';
+var agentContractAddress = '0x425Bd77633FdAc4900Ae3299954e3deE8B37fA3e';
 
 
 function connect(){
