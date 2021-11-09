@@ -31,6 +31,7 @@ contract Agent {
 
     struct policy {
         string title;
+        address insurer_addr;
         address [] clientlist;
         uint amount_cover;
         string policy_detail;
@@ -42,6 +43,7 @@ contract Agent {
     address[] public patientList;
     address[] public doctorList;
     address[] public insurerlist;
+    policy[] public policyList;
 
     mapping (address => patient) patientInfo;
     mapping (address => doctor) doctorInfo;
@@ -89,14 +91,23 @@ contract Agent {
         address addr = msg.sender;
            policy memory p;
             p.title = _title;
+            p.insurer_addr = addr;
             p.amount_cover= _amount_cover;
             p.policy_detail= _policy_detail;
             p.policy_image= _policy_image;
             policyInfo[addr]=p;
+            policyList.push(p)-1;
             return _title;
 
     }
 
+    function get_total_policies() public returns (uint) {
+        return policyList.length;
+    }
+
+    function get_policy_from_index(uint _index) public returns (address, string memory, uint amount_cover, string memory, string memory) {
+        return (policyList[_index].insurer_addr, policyList[_index].title, policyList[_index].amount_cover, policyList[_index].policy_detail,  policyList[_index].policy_image);
+    }
 
     function get_patient(address addr) view public returns (string memory , uint, uint[] memory , address, string memory ){
         // if(keccak256(patientInfo[addr].name) == keccak256(""))revert();

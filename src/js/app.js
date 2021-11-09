@@ -8,8 +8,8 @@
 
 var web3;
 
-var agentContractAddress = '0x38e2a426ce5eCB2115aFF1fB732B4c273AFB7617';
-//var agentContractAddress = '0xcA16f10e4fE9C6B99aC2581116FE496248F519bC';
+// var agentContractAddress = '0x38e2a426ce5eCB2115aFF1fB732B4c273AFB7617';
+var agentContractAddress = '0x4e622423277c727204db218ACb3a8418527c6c37';
 
 
 function connect(){
@@ -198,42 +198,6 @@ function connect(){
 		"stateMutability": "view",
 		"type": "function"
 	},
-        {
-            "constant": false,
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_title",
-                    "type": "string"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "_amount_cover",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "string",
-                    "name": "_policy_detail",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "_policy_image",
-                    "type": "string"
-                }
-            ],
-            "name": "add_policy",
-            "outputs": [
-                {
-                    "internalType": "string",
-                    "name": "",
-                    "type": "string"
-                }
-            ],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
         {
             "constant": false,
             "inputs": [
@@ -473,6 +437,98 @@ function connect(){
                     "internalType": "uint256",
                     "name": "",
                     "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_title",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_amount_cover",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_policy_detail",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_policy_image",
+                    "type": "string"
+                }
+            ],
+            "name": "add_policy",
+            "outputs": [
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [],
+            "name": "get_total_policies",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_index",
+                    "type": "uint256"
+                }
+            ],
+            "name": "get_policy_from_index",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                },
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "amount_cover",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
                 }
             ],
             "payable": false,
