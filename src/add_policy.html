@@ -100,7 +100,7 @@
                 </div>
           </div>
           <div class="view_policy" id="view_policy">
-            <div class="card text-center">
+            <!-- <div class="card text-center">
                 <div class="card-header" >
 
                 </div>
@@ -111,7 +111,7 @@
                   <a href="" class="btn btn-primary" id="link-doc">View Document </a>
                 </div>
 
-              </div>
+              </div> -->
         </div>
   </div>
   </div>
@@ -197,22 +197,96 @@
 function displayHash() {
                 $('#add-policy').hide();
                 $('#view_policy').show();
-                contractInstance.get_policy.call(key, {gas: 1000000},function(error, result){
-                  if(!error) {
-                      console.log(result);
-                      let url = `http://localhost:8080/ipfs/${result[3]}`;
-                      var title=result[0];
-                      var amt= result[1];
-                      var details=result[2];
-                      document.getElementById('policy-title').innerHTML = "Policy-title- "+title;
-                      document.getElementById('policy-cover').innerHTML = "Amount-Cover- " +amt+"ethers";
-                      document.getElementById('policy-detail').innerHTML = "Policy Details- " +details;
-                      document.getElementById("link-doc").setAttribute("href",url);
-                      console.log(`Url = ${url}`);
-                  } else {
+                contractInstance.get_total_policies.call(function(error, result) {
+                    if (!error) {
+                        console.log(result);
+                        total_len = result.c[0];
+                        var policy_count = 0;
+                        for (var j=0; j<total_len; j++) {
+                        contractInstance.get_policy_from_index.call(j, {gas: 1000000},function(error, result){
+                            if(!error) {
+                                console.log(key + result[0]);
+                                if (key == result[0]) {
+                                    policy_count++;
+                                    let url = `http://localhost:8080/ipfs/${result[4]}`;
+                                    var title=result[1];
+                                    var amt= result[2];
+                                    var details=result[3];
+                                    var card = document.createElement('div');
+                                    card.className = "card text-center";
+
+                                    var card_header = document.createElement('div');
+                                    card_header.className = "card-header";
+
+                                    var card_body = document.createElement('div');
+                                    card_body.className = "card-body";
+
+                                    var card_title = document.createElement('div');
+                                    card_title.className = "card-title";
+                                    card_title.innerHTML = "Policy-title- "+title;
+
+                                    var policy_cover = document.createElement('div');
+                                    policy_cover.className = "card-text";
+                                    policy_cover.innerHTML = "Amount-Cover- " +amt+"ethers";
+
+                                    var policy_detail = document.createElement('div');
+                                    policy_detail.className = "card-text";
+                                    policy_detail.innerHTML = "Policy Details- " +details;
+
+                                    var view_doc = document.createElement('a');
+                                    view_doc.className = "btn btn-primary";
+                                    view_doc.innerHTML = "View Document";
+                                    view_doc.setAttribute("href",url);
+
+                                    // document.getElementById('policy-title').innerHTML = "Policy-title- "+title;
+                                    // document.getElementById('policy-cover').innerHTML = "Amount-Cover- " +amt+"ethers";
+                                    // document.getElementById('policy-detail').innerHTML = "Policy Details- " +details;
+                                    // document.getElementById("link-doc").setAttribute("href",url);
+
+                                    card_body.appendChild(card_title);
+                                    card_body.appendChild(policy_cover);
+                                    card_body.appendChild(policy_detail);
+                                    card_body.appendChild(view_doc);
+
+                                    card.appendChild(card_header);
+                                    card.appendChild(card_body);
+                                    console.log(`Url = ${url}`);
+
+                                    document.getElementById('view_policy').appendChild(card);
+                                }
+                                // let url = `http://localhost:8080/ipfs/${result[1]}`;
+                                // console.log(`Url = ${url}`);
+                            } else {
+                            console.error(error);
+                            }
+                        });
+                        }
+                        if (policy_count == 0) {
+                            var div = document.createElement('div');
+                            div.className = "h1";
+                            div.innerHTML = "No Policies added yet !";
+                            document.getElementById('view_policy').appendChild(div);
+                        }
+                    } else {
                     console.error(error);
-                  }
+                    }
                 });
+                // contractInstance.get_policy.call(key, {gas: 1000000},function(error, result){
+                //   if(!error) {
+                //       console.log(result);
+                //       let url = `http://localhost:8080/ipfs/${result[3]}`;
+                //       var title=result[0];
+                //       var amt= result[1];
+                //       var details=result[2];
+                //       document.getElementById('policy-title').innerHTML = "Policy-title- "+title;
+                //       document.getElementById('policy-cover').innerHTML = "Amount-Cover- " +amt+"ethers";
+                //       document.getElementById('policy-detail').innerHTML = "Policy Details- " +details;
+                //       document.getElementById("link-doc").setAttribute("href",url);
+                //       console.log(`Url = ${url}`);
+                //   } else {
+                //     console.error(error);
+                //   }
+                // });
               }
 
 </script>
