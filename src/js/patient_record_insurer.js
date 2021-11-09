@@ -12,8 +12,14 @@ $(window).on('load', function() {
 
     populate_patient_list();
 
+
 });
 
+function open_modal(){
+    $("#myBtn").click(function(){
+        $("#myModal").modal();
+      });
+}
 function populate_patient_list() {
 
     contractInstance.get_accessed_patientlist_for_insurer(key, {gas: 1000000}, function(error, result){
@@ -33,7 +39,7 @@ function populate_patient_list() {
                             let policy_detail = document.createElement('td');
                             policy_detail.innerHTML = `<button class="btn btn-primary rounded-pill" id="${patientAddress}" onclick="location.href='./doc_pat_rec_list.html'">Policy detail</button>`;
                             let approve = document.createElement('td');
-                            approve.innerHTML = `<button class="btn btn-success rounded-pill" id="${patientAddress}" onclick="location.href='./doc_pat_rec_list.html'">Approve</button>`;
+                            approve.innerHTML = `<button class="btn btn-success rounded-pill" id="myBtn" onclick="open_modal">Approve</button>`;
                             let name = document.createTextNode(res[0]);
                             cell_data.appendChild(name);
                             row.appendChild(cell_data);
