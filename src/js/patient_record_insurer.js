@@ -102,21 +102,23 @@ function upload(patient_key, f, f_name) {
     };
 
 }
-function revoke_access(doc_key) {
+function revoke_access_insurer(doc_key) {
     console.log("key of doctor to remove access : " + doc_key);
-    contractInstance.revoke_access.sendTransaction(doc_key, {from: key, gas: 1000000, value: web3.toWei(2, 'ether')}, function(err) {
-      if(!err) location.reload();
+    contractInstance.revoke_insurer_access.sendTransaction(doc_key, {from: key, gas: 1000000, value: web3.toWei(2, 'ether')}, function(err) {
+      if(!err){
+        alert("Your access has been revoked");
+      }
       else console.log(err);
     });
   }
 function approve(){
     alert("Policy Approved");
     console.log(key);
-    revoke_access(key);
+    revoke_access_insurer(key);
 }
 function reject(){
     alert("Policy Rejected");
-    revoke_access(key);
+    revoke_access_insurers(key);
 }
 function displayHash() {
     $("#reject").click(function(){
