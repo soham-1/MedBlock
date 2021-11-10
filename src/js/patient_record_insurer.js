@@ -106,8 +106,14 @@ function revoke_access_insurer(doc_key) {
     console.log("key of doctor to remove access : " + doc_key);
     contractInstance.revoke_insurer_access_invert.sendTransaction(doc_key, {from: key, gas: 1000000, value: web3.toWei(2, 'ether')}, function(err) {
       if(!err) {
-          alert("your access has been invoked !");
-          location.reload();
+        contractInstance.add_patient_insurer(doc_key, 0, {gas: 1000000}, function(error, result) {
+            if (!error) {
+                alert("your access has been revoked !");
+                location.reload();
+            }
+            else console.log(error);
+          });
+          
       }
       else console.log(err);
     });
