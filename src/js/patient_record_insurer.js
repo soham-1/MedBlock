@@ -9,9 +9,8 @@ $(window).on('load', function() {
     connect();
     key = web3.currentProvider.selectedAddress;
     key = key.toLocaleLowerCase();
-
     populate_patient_list();
-
+    $('#view_policy').hide();
 });
 
 function populate_patient_list() {
@@ -31,15 +30,18 @@ function populate_patient_list() {
                             let view_button = document.createElement('td');
                             view_button.innerHTML = `<button class="btn btn-primary rounded-pill" id="${patientAddress}" onclick="location.href='./doc_pat_rec_list.html?key=${patientAddress}'">View history</button>`;
                             let policy_detail = document.createElement('td');
-                            policy_detail.innerHTML = `<button class="btn btn-primary rounded-pill" id="${patientAddress}" onclick="location.href='./doc_pat_rec_list.html'">Policy detail</button>`;
+                            policy_detail.innerHTML = `<button class="btn btn-primary rounded-pill" id="${patientAddress}" onclick=displayHash()>Policy detail</button>`;
                             let approve = document.createElement('td');
-                            approve.innerHTML = `<button class="btn btn-success rounded-pill" id="${patientAddress}" onclick="location.href='./doc_pat_rec_list.html'">Approve</button>`;
+                            approve.innerHTML = `<button class="btn btn-success rounded-pill" id="approve" onclick=approve()>Approve</button>`;
+                            let reject = document.createElement('td');
+                            reject.innerHTML = `<button class="btn btn-danger rounded-pill" id="reject" onclick=reject()>Reject</button>`;
                             let name = document.createTextNode(res[0]);
                             cell_data.appendChild(name);
                             row.appendChild(cell_data);
                             row.appendChild(view_button);
                             row.appendChild(policy_detail);
                             row.appendChild(approve);
+                            row.appendChild(reject);
                             table.appendChild(row);
                         } else {
                             console.log("error in get_patient");
@@ -100,3 +102,110 @@ function upload(patient_key, f, f_name) {
     };
 
 }
+function revoke_access(doc_key) {
+    console.log("key of doctor to remove access : " + doc_key);
+    contractInstance.revoke_access.sendTransaction(doc_key, {from: key, gas: 1000000, value: web3.toWei(2, 'ether')}, function(err) {
+      if(!err) location.reload();
+      else console.log(err);
+    });
+  }
+function approve(){
+    alert("Policy Approved");
+    console.log(key);
+    revoke_access(key);
+}
+function reject(){
+    alert("Policy Rejected");
+    revoke_access(key);
+}
+function displayHash() {
+    $("#reject").click(function(){
+        alert("Policy Rejected")
+      });
+    if ($('#view_policy').is(':visible')){
+        $('#view_policy').hide();
+        return;
+    }
+    $('#view_policy').show();
+    contractInstance.get_total_policies.call(function(error, result) {
+        if (!error) {
+            console.log(result);
+            total_len = result.c[0];
+            var policy_count = 0;
+            for (var j=1; j<total_len; j++) {
+                console.log("j " + j);
+            contractInstance.get_policy_from_index.call(j, {gas: 1000000},function(error, result){
+                if(!error) {
+                    if (key == result[0]) {
+                        policy_count++;
+                        console.log("count" + policy_count);
+                        let url = `http://localhost:8080/ipfs/${result[4]}`;
+                        var title=result[1];
+                        var amt= result[2];
+                        var details=result[3];
+                        var card = document.createElement('div');
+                        card.className = "card text-center";
+
+                        var card_header = document.createElement('div');
+                        card_header.className = "card-header";
+
+                        var card_body = document.createElement('div');
+                        card_body.className = "card-body";
+
+                        var card_title = document.createElement('div');
+                        card_title.className = "card-title";
+                        card_title.innerHTML = "Policy-title- "+title;
+
+                        var policy_cover = document.createElement('div');
+                        policy_cover.className = "card-text";
+                        policy_cover.innerHTML = "Amount-Cover- " +amt+"ethers";
+
+                        var policy_detail = document.createElement('div');
+                        policy_detail.className = "card-text";
+                        policy_detail.innerHTML = "Policy Details- " +details;
+
+                        var view_doc = document.createElement('a');
+                        view_doc.className = "btn btn-primary";
+                        view_doc.innerHTML = "View Document";
+                        view_doc.setAttribute("href",url);
+
+                        card_body.appendChild(card_title);
+                        card_body.appendChild(policy_cover);
+                        card_body.appendChild(policy_detail);
+                        card_body.appendChild(view_doc);
+
+                        card.appendChild(card_header);
+                        card.appendChild(card_body);
+                        console.log(`Url = ${url}`);
+
+                        document.getElementById('view_policy').appendChild(card);
+                    }
+                    console.log("count inside " + j+ " " + policy_count );
+                    if (j == total_len && policy_count == 0 && document.getElementById('view_policy').childElementCount == 0) {
+                        var div = document.createElement('div');
+                        div.className = "h1";
+                        div.innerHTML = "No Policies added yet !";
+                        document.getElementById('view_policy').appendChild(div);
+                    }
+                    // let url = `http://localhost:8080/ipfs/${result[1]}`;
+                    // console.log(`Url = ${url}`);
+                } else {
+                console.error(error);
+                }
+            });
+            // console.log("count inside " + policy_count + " " + j);
+            // if (j == total_len-1 && policy_count == 0) {
+            //     var div = document.createElement('div');
+            //     div.className = "h1";
+            //     div.innerHTML = "No Policies added yet !";
+            //     document.getElementById('view_policy').appendChild(div);
+            // }
+            }
+
+            console.log("count outside " + policy_count);
+
+        } else {
+        console.error(error);
+        }
+    });
+  }
