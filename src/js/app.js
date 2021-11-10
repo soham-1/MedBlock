@@ -9,7 +9,7 @@
 var web3;
 
 // var agentContractAddress = '0x38e2a426ce5eCB2115aFF1fB732B4c273AFB7617';
-var agentContractAddress = '0x2E877D2C5AF933471E3a563c49D93e37Ab6158FE';
+var agentContractAddress = '0x535f855ca84E4BAc02333704d5accf65831BC50d';
 
 
 function connect(){
@@ -559,6 +559,21 @@ function connect(){
             ],
             "payable": false,
             "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "paddr",
+                    "type": "address"
+                }
+            ],
+            "name": "revoke_insurer_access_invert",
+            "outputs": [],
+            "payable": true,
+            "stateMutability": "payable",
             "type": "function"
         }
     ]`);

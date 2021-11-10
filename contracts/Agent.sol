@@ -253,6 +253,12 @@ contract Agent {
         creditPool -= 2;
     }
 
+    function revoke_insurer_access_invert(address paddr) public payable{
+        remove_insurer_acs(paddr,msg.sender);
+        msg.sender.transfer(2 ether);
+        creditPool -= 2;
+    }
+
     function get_patient_list() public view returns(address[] memory ){
         return patientList;
     }
