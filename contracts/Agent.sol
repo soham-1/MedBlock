@@ -123,7 +123,7 @@ contract Agent {
         }
     function get_patient_insurer(address addr) view public returns(address){
             return patientInfo[addr].insurer_addr;
-        }
+    }
 
     function get_doctor(address addr) view public returns (string memory , uint){
         // if(keccak256(doctorInfo[addr].name)==keccak256(""))revert();

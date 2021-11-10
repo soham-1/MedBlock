@@ -75,6 +75,7 @@
                                     <th scope="col">View</th>
                                     <th scope="col">Policy details</th>
                                     <th scope="col">Approve Insurance</th>
+                                    <th scope="col">Reject Insurance</th>
                                 </tr>
                                 </thead>
                                 <tbody id="table-body"></tbody>
@@ -83,6 +84,8 @@
                         <h1 style="display: block;color:white">Hello</h1>
 </div>
 </div>
+</div>
+<div class="view_policy" id="view_policy">
 </div>
 </div>
 </div>
@@ -135,7 +138,9 @@
     <script src="js/patient_record_insurer.js"></script>
 
 <script>
-
+function close(){
+    $('#view_policy').hide();
+}
 
 </script>
 
