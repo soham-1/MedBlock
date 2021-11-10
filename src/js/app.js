@@ -8,8 +8,8 @@
 
 var web3;
 
-var agentContractAddress = '0xB9867960672A11AB92186Fa85f7C3DC18B0228B4';
-//var agentContractAddress = '0x4e622423277c727204db218ACb3a8418527c6c37';
+// var agentContractAddress = '0x38e2a426ce5eCB2115aFF1fB732B4c273AFB7617';
+var agentContractAddress = '0x535f855ca84E4BAc02333704d5accf65831BC50d';
 
 
 function connect(){
@@ -198,26 +198,26 @@ function connect(){
 		"stateMutability": "view",
 		"type": "function"
 	},
-        {
-            "constant": false,
-            "inputs": [
-                {
-                    "internalType": "address",
-                    "name": "addr",
-                    "type": "address"
-                },
-                {
-                    "internalType": "address",
-                    "name": "client",
-                    "type": "address"
-                }
-            ],
-            "name": "add_policy_client",
-            "outputs": [],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
+    {
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "key",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "add_policy_client",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
         {
             "constant": true,
             "inputs": [
@@ -533,6 +533,47 @@ function connect(){
             ],
             "payable": false,
             "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "add",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_index",
+                    "type": "uint256"
+                }
+            ],
+            "name": "user_exists_in_policy",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "paddr",
+                    "type": "address"
+                }
+            ],
+            "name": "revoke_insurer_access_invert",
+            "outputs": [],
+            "payable": true,
+            "stateMutability": "payable",
             "type": "function"
         }
     ]`);

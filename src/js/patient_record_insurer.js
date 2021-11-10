@@ -18,12 +18,12 @@ function populate_patient_list() {
     contractInstance.get_accessed_patientlist_for_insurer(key, {gas: 1000000}, function(error, result){
             if(!error){
                 patientAddressList = result;
-                console.log(result);
+                // console.log(result);
                 var table = document.getElementById("table-body");
                 patientAddressList.forEach(function(patientAddress, index){
                     contractInstance.get_patient.call(patientAddress, {gas: 1000000}, function(error, res){
                         if(!error) {
-                            console.log(res);
+                            // console.log(res);
                             patient_name = res[0];
                             let row = document.createElement('tr');
                             let cell_data = document.createElement('td');
@@ -32,9 +32,9 @@ function populate_patient_list() {
                             let policy_detail = document.createElement('td');
                             policy_detail.innerHTML = `<button class="btn btn-primary rounded-pill" id="${patientAddress}" onclick=displayHash()>Policy detail</button>`;
                             let approve = document.createElement('td');
-                            approve.innerHTML = `<button class="btn btn-success rounded-pill" id="approve" onclick=approve()>Approve</button>`;
+                            approve.innerHTML = '<button class="btn btn-success rounded-pill" id="approve" onclick=approve(\"' + patientAddress + '\")>Approve</button>';
                             let reject = document.createElement('td');
-                            reject.innerHTML = `<button class="btn btn-danger rounded-pill" id="reject" onclick=reject()>Reject</button>`;
+                            reject.innerHTML = '<button class="btn btn-danger rounded-pill" id="reject" onclick=reject(\"' + patientAddress + '\")>Reject</button>';
                             let name = document.createTextNode(res[0]);
                             cell_data.appendChild(name);
                             row.appendChild(cell_data);
@@ -104,27 +104,27 @@ function upload(patient_key, f, f_name) {
 }
 function revoke_access_insurer(doc_key) {
     console.log("key of doctor to remove access : " + doc_key);
-    contractInstance.revoke_insurer_access.sendTransaction(doc_key, {from: key, gas: 1000000, value: web3.toWei(2, 'ether')}, function(err) {
-      if(!err){
-        alert("Your access has been revoked");
+    contractInstance.revoke_insurer_access_invert.sendTransaction(doc_key, {from: key, gas: 1000000, value: web3.toWei(2, 'ether')}, function(err) {
+      if(!err) {
+          alert("your access has been invoked !");
+          location.reload();
       }
       else console.log(err);
     });
   }
-function approve(){
+function approve(pat_key){
     alert("Policy Approved");
-    console.log(key);
-    revoke_access_insurer(key);
+    console.log("patkey " + pat_key);
+    revoke_access_insurer(pat_key);
 }
-function reject(){
+function reject(pat_key){
     alert("Policy Rejected");
-    revoke_access_insurers(key);
+    revoke_access_insurer(pat_key);
 }
 function displayHash() {
-    $("#reject").click(function(){
-        alert("Policy Rejected")
-      });
     if ($('#view_policy').is(':visible')){
+        var elem = document.getElementById('view_policy');
+        elem.innerHTML = '';
         $('#view_policy').hide();
         return;
     }
