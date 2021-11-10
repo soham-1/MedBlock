@@ -109,6 +109,13 @@ contract Agent {
         return (policyList[_index].insurer_addr, policyList[_index].title, policyList[_index].amount_cover, policyList[_index].policy_detail,  policyList[_index].policy_image);
     }
 
+    function user_exists_in_policy(address add, uint _index) public view returns (bool){
+        for(uint i = 0; i < policyList[_index].clientlist.length; i++) {
+            if (policyList[_index].clientlist[i] == add) return true;
+        }
+        return false;
+    }
+
     function get_patient(address addr) view public returns (string memory , uint, uint[] memory , address, string memory ){
         // if(keccak256(patientInfo[addr].name) == keccak256(""))revert();
         return (patientInfo[addr].name, patientInfo[addr].age, patientInfo[addr].diagnosis, Empty[addr], patientInfo[addr].record);
@@ -118,12 +125,12 @@ contract Agent {
         return (insurerInfo[addr].name, insurerInfo[addr].email);
     }
     function add_patient_insurer(address addr, address insurer_addr) public{
-            patientInfo[addr].insurer_addr=insurer_addr;
-            insurerInfo[insurer_addr].clientlist.push(addr) -1;
-        }
+        patientInfo[addr].insurer_addr=insurer_addr;
+        insurerInfo[insurer_addr].clientlist.push(addr) -1;
+    }
     function get_patient_insurer(address addr) view public returns(address){
-            return patientInfo[addr].insurer_addr;
-        }
+        return patientInfo[addr].insurer_addr;
+    }
 
     function get_doctor(address addr) view public returns (string memory , uint){
         // if(keccak256(doctorInfo[addr].name)==keccak256(""))revert();
@@ -133,8 +140,8 @@ contract Agent {
         // if(keccak256(doctorInfo[addr].name)==keccak256(""))revert();
         return (policyInfo[addr].title, policyInfo[addr].amount_cover, policyInfo[addr].policy_detail,  policyInfo[addr].policy_image);
     }
-    function add_policy_client(address addr, address client)  public{
-        policyInfo[addr].clientlist.push(client)-1;
+    function add_policy_client(address key, uint _index)  public{
+        policyList[_index].clientlist.push(key)-1;
     }
     function client_policy_list(address addr) view public returns(address[] memory){
         return policyInfo[addr].clientlist;

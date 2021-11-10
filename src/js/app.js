@@ -9,7 +9,7 @@
 var web3;
 
 // var agentContractAddress = '0x38e2a426ce5eCB2115aFF1fB732B4c273AFB7617';
-var agentContractAddress = '0x425Bd77633FdAc4900Ae3299954e3deE8B37fA3e';
+var agentContractAddress = '0x2E877D2C5AF933471E3a563c49D93e37Ab6158FE';
 
 
 function connect(){
@@ -198,26 +198,26 @@ function connect(){
 		"stateMutability": "view",
 		"type": "function"
 	},
-        {
-            "constant": false,
-            "inputs": [
-                {
-                    "internalType": "address",
-                    "name": "addr",
-                    "type": "address"
-                },
-                {
-                    "internalType": "address",
-                    "name": "client",
-                    "type": "address"
-                }
-            ],
-            "name": "add_policy_client",
-            "outputs": [],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
+    {
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "key",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "add_policy_client",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
         {
             "constant": true,
             "inputs": [
@@ -533,6 +533,32 @@ function connect(){
             ],
             "payable": false,
             "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "add",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_index",
+                    "type": "uint256"
+                }
+            ],
+            "name": "user_exists_in_policy",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
             "type": "function"
         }
     ]`);
