@@ -17,7 +17,7 @@ function login(){
             }
         } else {
             console.log("error in get patient list");
-            console.log(error); 
+            console.log(error);
         }
     });
 
@@ -120,15 +120,15 @@ function addAgent(){
         }
         console.log("is agent valid ? " + validAgent);
         if (validAgent == true) {
-            var ipfshash = "";
+
 
             if (designation == "0") {
-                var reportTitle =
-`Name: ${name1}
-Public Key: ${publicKey}
+                const reader = new FileReader();
+                const photo = document.getElementById("policy_file");
+                reader.readAsArrayBuffer(photo.files[0]);
 
-`;
-            var buffer = Buffer(reportTitle);
+            reader.onloadend = function() {
+                var buffer = Buffer(reader.result);
 
             ipfs.files.add(buffer, (error, result) => {
                 if(error){
@@ -147,7 +147,9 @@ Public Key: ${publicKey}
                     })
                 }
             })
-        }else {
+        }
+    }
+    else {
                 contractInstance.add_agent(name1, age, designation, ipfshash, {gas: 1000000}, (err, res) => {
                 if (!err) {
                     if (designation == "1") {

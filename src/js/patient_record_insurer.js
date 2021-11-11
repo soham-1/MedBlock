@@ -189,12 +189,12 @@ function displayHash() {
                         document.getElementById('view_policy').appendChild(card);
                     }
                     console.log("count inside " + j+ " " + policy_count );
-                    if (j == total_len && policy_count == 0 && document.getElementById('view_policy').childElementCount == 0) {
-                        var div = document.createElement('div');
-                        div.className = "h1";
-                        div.innerHTML = "No Policies added yet !";
-                        document.getElementById('view_policy').appendChild(div);
-                    }
+                    // if (j == total_len && policy_count == 0 && document.getElementById('view_policy').childElementCount == 0) {
+                    //     var div = document.createElement('div');
+                    //     div.className = "h1";
+                    //     div.innerHTML = "No Policies added yet !";
+                    //     document.getElementById('view_policy').appendChild(div);
+                    // }
                     // let url = `http://localhost:8080/ipfs/${result[1]}`;
                     // console.log(`Url = ${url}`);
                 } else {

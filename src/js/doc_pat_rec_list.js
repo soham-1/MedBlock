@@ -23,6 +23,9 @@ $(window).on('load', function() {
             console.log(b);
            document.getElementById('name').innerHTML = _name;
             $("#age").html(b);
+            let url = `http://localhost:8080/ipfs/${result[4]}`;
+            var view_aadhar=document.getElementById('view_aadhar');
+            view_aadhar.setAttribute("href",url);
            }
            else{
             console.log(error);
