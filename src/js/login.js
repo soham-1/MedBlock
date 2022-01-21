@@ -150,15 +150,35 @@ function addAgent(){
         }
     }
     else {
-                contractInstance.add_agent(name1, age, designation, ipfshash, {gas: 1000000}, (err, res) => {
-                if (!err) {
-                    if (designation == "1") {
-                        location.replace("./doctor_profile.html");
-                    }
+        const reader = new FileReader();
+                const photo = document.getElementById("policy_file");
+                reader.readAsArrayBuffer(photo.files[0]);
 
-                } else
-                    console.log(err);
-                });
+            reader.onloadend = function() {
+                var buffer = Buffer(reader.result);
+
+            ipfs.files.add(buffer, (error, result) => {
+                if(error){
+                    console.log(error);
+                }else{
+                    console.log("result: "+result)
+                    ipfshash = result[0].hash;
+                    console.log("Ipfs hash: "+ipfshash);
+                    contractInstance.add_agent(name1, age, designation, ipfshash, {gas: 1000000}, (err, res) => {
+                        if(!err){
+                            if (designation == "1") {
+                                location.replace("./doctor_profile.html");
+                            }
+                        }else{
+                            console.log(err);
+                        }
+
+                    })
+                }
+            })
+        }
+
+                
         }
     } else {
             $(".alert-info").show();
