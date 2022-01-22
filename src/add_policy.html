@@ -68,10 +68,9 @@
         <!--  BEGIN CONTENT PART  -->
         <div id="content" class="main-content">
             <div class="container">
-                <div class="page-header col-lg-12">
-                    <!-- <div class="page-title" id="add-policy"> -->
-                        <h1>Add Policy </h1>
-                    <div>
+                <div style="text-align:right;">
+                    <button onClick="displayHash()" class="btn btn-primary mt-4">View Policy</button>
+                </div>
             <div class="mb-3 col-lg-12 mt-3">
                 <label for="title" class="form-label">Policy title</label>
                 <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" required autofocus>
@@ -80,19 +79,21 @@
                 <label for="amt" class="form-label">Amount Cover</label>
                 <input type="tel" class="form-control" id="amt" placeholder="Enter amt" name="amt" required autofocus>
             </div>
-            <div class="">
+            <div class="mb-3 col-lg-12 mt-3">
                 <label class="control-label" for="details">Details:</label>
             </div>
             <div class="col-sm-10 col-lg-12">
                 <textarea class="form-control" rows="7" id="details" placeholder="Enter details to be added" name = "Details" style="width: inherit" required autofocus></textarea>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3 col-lg-12 mt-3">
                 <label for="policy_file">Select Policy doc </label>
                 <input type="file" class="form-control-file" id="policy_file" name="policy_file">
             </div>
-            <button onClick="upload()" class="btn btn-primary">Submit</button>
+            <div style="text-align: center;">
+            <button onClick="upload()" class="btn btn-primary mb-3 col-lg-3 mt-3" style="justify-content: center;">Submit</button>
+            </div>
         </div>
-        <button onClick="displayHash()" class="btn btn-primary mt-4">View Policy</button>
+
 
                     </div>
 
