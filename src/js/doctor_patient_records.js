@@ -30,7 +30,7 @@ function populate_patient_list() {
                             let row = document.createElement('tr');
                             let cell_data = document.createElement('td');
                             let view_button = document.createElement('td');
-                            view_button.innerHTML = `<button class="btn btn-primary rounded-pill" id="${patientAddress}" onclick="location.href='./doc_pat_rec_list.html?key=${patientAddress}'">View history</button>`;
+                            view_button.innerHTML = `<button class="btn btn-primary rounded-pill" id="${patientAddress}" onclick="location.href='./doc_pat_rec_list.html?key=${patientAddress}&user=doctor'">View history</button>`;
                             let upload_record_button = document.createElement('td');
                             let upload_bill_button = document.createElement('td');
                             upload_record_button.innerHTML = `<button class="btn btn-success rounded-pill" id="${patientAddress}" onclick="get_file('${patientAddress}')">Upload Record</button><input type="file" id="fileupload" style="display: none"/>`;

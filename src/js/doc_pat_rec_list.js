@@ -1,5 +1,11 @@
 $('title').load('common/title.html');
-$("#doctor_sidebar").load('common/doctor_sidebar.html');
+let url = new URL(location.href);
+var user_type = url.searchParams.get("user");
+if (user_type == "insurer") {
+    $("#doctor_sidebar").load('common/insurer_sidebar.html');
+} else {
+    $("#doctor_sidebar").load('common/doctor_sidebar.html');
+}
 
 var key;
 var patient_key;
@@ -54,6 +60,7 @@ function populate_patient_rec_list() {
                         view_button.innerHTML = `<button class="btn btn-primary rounded-pill" onclick="location.href='${file_url}'">View</button>`;
                         let name = document.createTextNode(file_name);
                         file_cell.append(name);
+                        file_cell.style.color = "white";
                         row.appendChild(file_cell);
                         row.appendChild(view_button);
                         table.appendChild(row);
@@ -82,6 +89,7 @@ function populate_patient_bill_list() {
                         view_button.innerHTML = `<button class="btn btn-primary rounded-pill" onclick="location.href='${file_url}'">View</button>`;
                         let name = document.createTextNode(file_name);
                         file_cell.append(name);
+                        file_cell.style.color = "white";
                         row.appendChild(file_cell);
                         row.appendChild(view_button);
                         table.appendChild(row);

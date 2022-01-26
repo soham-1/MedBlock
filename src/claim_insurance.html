@@ -13,9 +13,35 @@
     <link href="assets/css/plugins.css" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
     <style>
-        .container{
+        /* .container{
             background-color: white;
 
+        } */
+        .container{
+            background: rgb(3, 32, 51);
+            background: linear-gradient(
+            132deg,
+            rgba(3, 32, 61, 1) 17%,
+            rgba(14, 57, 70, 1) 73%
+            );
+                    margin-top: 35px;
+                    color: white;
+                }
+
+        #content {
+            background: rgb(3, 32, 51);
+            background: linear-gradient(
+            132deg,
+            rgba(3, 32, 61, 1) 17%,
+            rgba(14, 57, 70, 1) 73%
+            );
+            width: 50%;
+            flex-grow: 8;
+            margin-top: 10px;
+            margin-bottom: 0px;
+        }
+        input{
+            color:white;
         }
     </style>
 </head>
@@ -60,10 +86,10 @@
 
         <!--  BEGIN CONTENT PART  -->
         <div id="content" class="main-content">
-            <div class="container">
+            <div class="container" style="padding: 0px;">
                 <div class="page-header">
-                    <div class="page-title col-lg-12" id="add-policy">
-                        <!-- <h1>Claim insurance </h1> -->
+                    <div class="page-title col-lg-12" id="add-policy" style="padding: 10px;">
+                        <!-- <h1>Claim insurance </h1>  -->
 
 
 
@@ -81,14 +107,15 @@
                                 <tbody id="table-body"></tbody>
                             </table>
 
-                        <h1 style="display: block;color:white">Hello</h1>
-</div>
-</div>
-</div>
-<div class="view_policy" id="view_policy">
-</div>
-</div>
-</div>
+                        <!-- <h1 style="display: block;color:white">Hello</h1> -->
+                    </div>
+
+                </div>
+            </div>
+            <div class="view_policy" id="view_policy">
+            </div>
+        </div>
+    </div>
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -145,4 +172,79 @@ function close(){
 </script>
 
 </body>
+<style>
+    .cust-btn{
+        background: none;
+        animation: glow 800ms ease-out infinite alternate;
+        /* background: linear-gradient(#333933, #222922); */
+        border-color: #393;
+        box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+        color: white;
+        outline: none;
+    }
+    .cust-btn:hover{
+        color:rgb(207, 200, 200)
+    }
+    .pulseText:hover{
+        color: #afa;
+    }
+    .pulseText {
+        color: #6f6;
+        background: none;
+        font-weight: bold;
+        font-size: large;
+        -webkit-animation-name: pulseText;
+        -moz-animation-name: pulseText;
+        -o-animation-name: pulseText;
+        animation-name: pulseText;
+        -webkit-animation-duration: 0.8s;
+        -moz-animation-duration: 0.8s;
+        -o-animation-duration: 0.8s;
+        animation-duration: 0.8s;
+        -webkit-animation-iteration-count: infinite;
+        -moz-animation-iteration-count: infinite;
+        -o-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+        -webkit-animation-direction: alternate;
+        -moz-animation-direction: alternate;
+        -o-animation-direction: alternate;
+        animation-direction: alternate;
+        -webkit-animation-timing-function: ease-in-out;
+        -moz-animation-timing-function: ease-in-out;
+        -o-animation-timing-function: ease-in-out;
+        animation-timing-function: ease-in-out;
+        border: 0px;
+    }
+    .pulseTextRed{
+        color: #ff595c;
+        background: transparent;
+        font-weight: bold;
+        font-size: large;
+        border: none;
+        -webkit-animation-name: pulseText;
+        -moz-animation-name: pulseText;
+        -o-animation-name: pulseText;
+        animation-name: pulseText;
+        -webkit-animation-duration: 0.8s;
+        -moz-animation-duration: 0.8s;
+        -o-animation-duration: 0.8s;
+        animation-duration: 0.8s;
+        -webkit-animation-iteration-count: infinite;
+        -moz-animation-iteration-count: infinite;
+        -o-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+        -webkit-animation-direction: alternate;
+        -moz-animation-direction: alternate;
+        -o-animation-direction: alternate;
+        animation-direction: alternate;
+        -webkit-animation-timing-function: ease-in-out;
+        -moz-animation-timing-function: ease-in-out;
+        -o-animation-timing-function: ease-in-out;
+        animation-timing-function: ease-in-out;
+        border: 0px;
+    }
+    .pulseTextRed:hover{
+        color: #ffa0a1;
+    }
+</style>
 </html>

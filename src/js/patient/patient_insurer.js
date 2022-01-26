@@ -112,7 +112,8 @@ function view_policy() {
     var total_len = result.c[0];
     console.log("total_policies " + total_len);
     for (var j = 0; j < total_len; j++) {
-      contractInstance.get_policy_from_index.call(j, {gas: 1000000},function(error, result){
+      let j_ = j;
+      contractInstance.get_policy_from_index.call(j_, {gas: 1000000},function(error, result){
         console.log(result);
         if (insu_key == result[0]) {
             let url = `http://localhost:8080/ipfs/${result[4]}`;
@@ -162,12 +163,12 @@ function view_policy() {
               contractInstance.get_total_policies.call({gas:1000000}, function(error, result) {
                   if (!error) {
                     var total_len = result.c[0];
-                    for (var j = 0; j < total_len; j++) {
-                      let local_j = j;
-                      contractInstance.get_policy_from_index.call(local_j, {gas: 1000000},function(error, result){
+                    for (var i = 0; i < total_len; i++) {
+                      let i_ = i;
+                      contractInstance.get_policy_from_index.call(i_, {gas: 1000000},function(error, result){
                         if(!error) {
                           if (policy_title == result[1]) {
-                            contractInstance.add_policy_client(key, local_j, {gas: 1000000}, function(error, result){
+                            contractInstance.add_policy_client(key, i_, {gas: 1000000}, function(error, result){
                               if (!error) console.log("enrolled ");
                             });
                           }

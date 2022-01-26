@@ -40,7 +40,7 @@ function login(){
             var InsurerList = result;
             for(var i = 0; i < InsurerList.length; i++) {
                 if (publicKey.toLowerCase() == InsurerList[i]) {
-                    location.href = "./insurer.html?key=" + publicKey;
+                    location.href = "./insurer/insurer_profile.html";
                     user_found = true;
                 }
             }

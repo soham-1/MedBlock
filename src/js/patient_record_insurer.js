@@ -28,15 +28,16 @@ function populate_patient_list() {
                             let row = document.createElement('tr');
                             let cell_data = document.createElement('td');
                             let view_button = document.createElement('td');
-                            view_button.innerHTML = `<button class="btn btn-primary rounded-pill" id="${patientAddress}" onclick="location.href='./doc_pat_rec_list.html?key=${patientAddress}'">View history</button>`;
+                            view_button.innerHTML = `<button class="btn rounded-pill cust-btn" id="${patientAddress}" onclick="location.href='./doc_pat_rec_list.html?key=${patientAddress}&user=insurer'">View history</button>`;
                             let policy_detail = document.createElement('td');
-                            policy_detail.innerHTML = `<button class="btn btn-primary rounded-pill" id="${patientAddress}" onclick=displayHash()>Policy detail</button>`;
+                            policy_detail.innerHTML = `<button class="btn rounded-pill cust-btn" id="${patientAddress}" onclick=displayHash()>Policy detail</button>`;
                             let approve = document.createElement('td');
-                            approve.innerHTML = '<button class="btn btn-success rounded-pill" id="approve" onclick=approve(\"' + patientAddress + '\")>Approve</button>';
+                            approve.innerHTML = '<button class="btn rounded-pill pulseText" id="approve" onclick=approve(\"' + patientAddress + '\")>Approve</button>';
                             let reject = document.createElement('td');
-                            reject.innerHTML = '<button class="btn btn-danger rounded-pill" id="reject" onclick=reject(\"' + patientAddress + '\")>Reject</button>';
+                            reject.innerHTML = '<button class="btn rounded-pill pulseTextRed" id="reject" onclick=reject(\"' + patientAddress + '\")>Reject</button>';
                             let name = document.createTextNode(res[0]);
                             cell_data.appendChild(name);
+                            cell_data.style.color = "white";
                             row.appendChild(cell_data);
                             row.appendChild(view_button);
                             row.appendChild(policy_detail);
@@ -152,7 +153,7 @@ function displayHash() {
                         var amt= result[2];
                         var details=result[3];
                         var card = document.createElement('div');
-                        card.className = "card text-center";
+                        card.className = "card text-center container";
 
                         var card_header = document.createElement('div');
                         card_header.className = "card-header";
