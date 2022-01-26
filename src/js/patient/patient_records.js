@@ -94,7 +94,9 @@ function get_doctor_list() {
                   let option = document.createElement('option');
                   option.textContent = doc_name;
                   option.value = doctor;
+                  option.style.color = "black";
                   select_menu.appendChild(option);
+                  select_menu.style.color = "white";
                     }
               });
           });
@@ -136,6 +138,7 @@ function populate_doctor_list(patient_list) {
               button.innerHTML = `<button class="btn btn-danger rounded-pill revoke_button" id="${doctor}" onclick="revoke_access('${doctor}')">Revoke Access</button>`;
               let name = document.createTextNode(res[0]);
               cell_data.appendChild(name);
+              cell_data.style.color = "white";
               row.appendChild(cell_data);
               row.appendChild(button);
               table.appendChild(row);

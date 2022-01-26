@@ -15,8 +15,30 @@
     <title></title>
     <style>
         .container{
-            background-color: white;
-            margin-top: 20px;
+            background: rgb(3, 32, 51);
+            background: linear-gradient(
+            132deg,
+            rgba(3, 32, 61, 1) 17%,
+            rgba(14, 57, 70, 1) 73%
+            );
+                    margin-top: 35px;
+                    color: white;
+                }
+
+        #content {
+            background: rgb(3, 32, 51);
+            background: linear-gradient(
+            132deg,
+            rgba(3, 32, 61, 1) 17%,
+            rgba(14, 57, 70, 1) 73%
+            );
+            width: 50%;
+            flex-grow: 8;
+            margin-top: 10px;
+            margin-bottom: 0px;
+        }
+        input{
+            color:white;
         }
         #access_table{
           background-color: white;
@@ -111,11 +133,11 @@
 
       </div> -->
 </div>
-<div id="access_table">
+<div id="access_table container" style="padding: 20px">
   <div class="panel-heading  mt-5 mb-4">
-    <h3 class="text-center">Current EMR access holders</h3>
+    <h3 class="text-center" style="color: white;"><b>Current EMR access holders</b></h3>
 </div>
-<table class="table table-striped text-center mb-4">
+<table class="table text-center mb-4">
     <thead>
     <tr>
         <th scope="col">Insurer</th>
@@ -124,7 +146,7 @@
     </thead>
     <tbody id="table-body"></tbody>
 </table>
-<h1 style="display: block;color:white">Hello</h1>
+<!-- <h1 style="display: block;color:white">Hello</h1> -->
 </div>
 
 
@@ -183,7 +205,7 @@ $(window).on('load', function() {
                     var amt= result[2];
                     var details=result[3];
                     var card = document.createElement('div');
-                    card.className = "card text-center";
+                    card.className = "card text-center container";
 
                     var card_header = document.createElement('div');
                     card_header.className = "card-header";
@@ -238,6 +260,7 @@ $(window).on('load', function() {
               button.innerHTML = `<button class="btn btn-danger rounded-pill revoke_button" id="${result}" onclick="revoke_access_insurer('${result}')">Revoke Access</button>`;
               let name = document.createTextNode(res[0]);
               cell_data.appendChild(name);
+              cell_data.style.color = "white";
               row.appendChild(cell_data);
               row.appendChild(button);
               table.appendChild(row);

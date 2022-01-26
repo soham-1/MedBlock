@@ -13,6 +13,34 @@
     <!-- END GLOBAL MANDATORY STYLES -->
 
     <title></title>
+    <style>
+        .container{
+            background: rgb(3, 32, 51);
+            background: linear-gradient(
+            132deg,
+            rgba(3, 32, 61, 1) 17%,
+            rgba(14, 57, 70, 1) 73%
+            );
+                    margin-top: 35px;
+                    color: white;
+                }
+
+        #content {
+            background: rgb(3, 32, 51);
+            background: linear-gradient(
+            132deg,
+            rgba(3, 32, 61, 1) 17%,
+            rgba(14, 57, 70, 1) 73%
+            );
+            width: 50%;
+            flex-grow: 8;
+            margin-top: 10px;
+            margin-bottom: 0px;
+        }
+        input{
+            color:white;
+        }
+    </style>
 </head>
 
 <body class="default-sidebar">
@@ -53,12 +81,12 @@
 
         <!--  BEGIN CONTENT PART  -->
         <div id="content" class="main-content">
-            <div class="container">
+            <div class="container" style="padding: 0px;">
 
-                <div class="custom-center-content mx-auto bg-white col-lg-11 mt-2">
+                <div class="custom-center-content container col-lg-12 mt-2">
 
 
-                        <div class="panel-heading mb-5">
+                        <div class="panel-heading my-5">
                             <h3 class="text-center">Medical History </h3>
                             <label id="publickey"></label>
                             <br>
@@ -68,7 +96,8 @@
 <label>Age - </label>
 <bold><label id="age"></label></bold>
                         </div>
-                        <table class="table table-striped text-center mb-3">
+                        <h3 class="text-center"><b>Records</b></h3>
+                        <table class="table text-center mb-3">
                             <thead>
                             <tr>
                                 <th scope="col">File name</th>
@@ -77,7 +106,8 @@
                             </thead>
                             <tbody id="table-body"></tbody>
                         </table>
-                        <table class="table table-striped text-center mb-3">
+                        <h3 class="text-center mt-5"><b>Bills</b></h3>
+                        <table class="table text-center mb-3">
                             <thead>
                             <tr>
                                 <th scope="col">bill date</th>
@@ -86,7 +116,7 @@
                             </thead>
                             <tbody id="bill-table-body"></tbody>
                         </table>
-                        <h1 style="display: block;color:white">Hello</h1>
+                        <!-- <h1 style="display: block;color:white">Hello</h1> -->
 
                 </div>
 

@@ -121,7 +121,7 @@ function view_policy() {
             var amt= result[2];
             var details=result[3];
             var card = document.createElement('div');
-            card.className = "card text-center";
+            card.className = "card text-center container";
 
             var card_header = document.createElement('div');
             card_header.className = "card-header";
@@ -142,12 +142,12 @@ function view_policy() {
             policy_detail.innerHTML = "Policy Details- " +details;
 
             var view_doc = document.createElement('a');
-            view_doc.className = "btn btn-info";
+            view_doc.className = "btn btn-info mt-2";
             view_doc.innerHTML = "View Document";
             view_doc.setAttribute("href",url);
 
             var enroll = document.createElement('a');
-            enroll.className = "btn btn-success mx-3";
+            enroll.className = "btn btn-success mx-3 mt-2";
             enroll.innerHTML = "Enroll";
 
             card_body.appendChild(card_title);

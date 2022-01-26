@@ -15,9 +15,30 @@
     <title></title>
     <style>
         .container{
-            background-color: white;
+            background: rgb(3, 32, 51);
+            background: linear-gradient(
+            132deg,
+            rgba(3, 32, 61, 1) 17%,
+            rgba(14, 57, 70, 1) 73%
+            );
+                    margin-top: 35px;
+                    color: white;
+                }
 
-
+        #content {
+            background: rgb(3, 32, 51);
+            background: linear-gradient(
+            132deg,
+            rgba(3, 32, 61, 1) 17%,
+            rgba(14, 57, 70, 1) 73%
+            );
+            width: 50%;
+            flex-grow: 8;
+            margin-top: 10px;
+            margin-bottom: 0px;
+        }
+        input{
+            color:white;
         }
     </style>
 </head>
@@ -60,7 +81,7 @@
 
         <!--  BEGIN CONTENT PART  -->
         <div id="content" class="main-content">
-            <div class="container">
+            <div class="container" style="padding: 10px;">
 
 
                 <!-- <div>
@@ -84,8 +105,8 @@
                         <div class="panel-heading mb-5">
                             <h3 class="text-center mt-5 ">Doctor's list</h3>
                         </div>
-                        <select class="form-select mb-3" aria-label="Default select example" id="doc_list">
-                            <option selected>-- Please Select a Doctor --</option>
+                        <select class="form-select mb-3" aria-label="Default select example" id="doc_list" style="background: none;">
+                            <option selected style="color: black;">-- Please Select a Doctor --</option>
                         </select>
                         <div class="panel-heading mb-5 text-center">
                             <button class="btn btn-success btn-lg" onclick="grant_access()">Grant Access</button>
@@ -97,7 +118,7 @@
                         <div class="panel-heading mb-5">
                             <h3 class="text-center">Current EMR access holders</h3>
                         </div>
-                        <table class="table table-striped text-center mb-4">
+                        <table class="table text-center mb-4">
                             <thead>
                             <tr>
                                 <th scope="col">Doctor</th>
@@ -106,7 +127,7 @@
                             </thead>
                             <tbody id="table-body"></tbody>
                         </table>
-                        <h1 style="display: block;color:white">Hello</h1>
+                        <!-- <h1 style="display: block;color:white">Hello</h1> -->
                     </div>
 
 

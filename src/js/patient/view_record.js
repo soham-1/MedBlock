@@ -50,6 +50,7 @@ function populate_patient_rec_list() {
                         view_button.innerHTML = `<button class="btn btn-primary rounded-pill" onclick="location.href='${file_url}'">View</button>`;
                         let name = document.createTextNode(file_name);
                         file_cell.append(name);
+                        file_cell.style.color = "white";
                         row.appendChild(file_cell);
                         row.appendChild(view_button);
                         table.appendChild(row);
@@ -78,6 +79,7 @@ function populate_patient_bill_list() {
                         view_button.innerHTML = `<button class="btn btn-primary rounded-pill" onclick="location.href='${file_url}'">View</button>`;
                         let name = document.createTextNode(file_name);
                         file_cell.append(name);
+                        file_cell.style.color = "white";
                         row.appendChild(file_cell);
                         row.appendChild(view_button);
                         table.appendChild(row);
