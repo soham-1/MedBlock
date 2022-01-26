@@ -14,18 +14,38 @@
     <!-- END GLOBAL MANDATORY STYLES -->
 <style>
     .container{
-        background-color: #1D1E22;
+        background: rgb(3, 32, 51);
+    background: linear-gradient(
+      132deg,
+      rgba(3, 32, 61, 1) 17%,
+      rgba(14, 57, 70, 1) 73%
+    );
         margin-top: 35px;
         color: white;
     }
     .main-content{
-        background-color: #1D1E22;
+        background: rgb(3, 32, 51);
+    background: linear-gradient(
+      132deg,
+      rgba(3, 32, 61, 1) 17%,
+      rgba(14, 57, 70, 1) 73%
+    );
     }
     .text-glow {
   text-shadow: 0 0 80px rgb(192 219 255 / 35%), 0 0 32px rgb(65 120 255 / 24%);
 }
-
-
+#content {
+    background: rgb(3, 32, 51);
+    background: linear-gradient(
+      132deg,
+      rgba(3, 32, 61, 1) 17%,
+      rgba(14, 57, 70, 1) 73%
+    );
+    width: 50%;
+    flex-grow: 8;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
 /* https://rareblocks.xyz/ */
 .text-gradient {
   background: linear-gradient(to right, #30CFD0, #c43ad6);
@@ -38,7 +58,7 @@
   background-color: transparent;
 }
 rect{
-    fill: #1D1E22;
+    fill: #181722;
 }
 text{
     fill:white;
@@ -119,17 +139,21 @@ text{
                         </a>
                         <ul class="collapse submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
                             <li class="active">
-                                <a href="../insurer_profile.html"> <i class="mr-1 flaticon-user-6"></i> Profile </a>
+                                <a href="../insurer_profile.html"> <i class="flaticon-bar-chart-2"></i>Analysis </a>
+                            </li>
+                            <li class="">
+                                <a href="insurer/insurer_profile.html"> <i class="mr-1 flaticon-user-6"></i> Profile </a>
                             </li>
                             <li>
                                 <a href="../add_policy.html">  <i class="flaticon-edit-3"></i>Add Policy </a>
                             </li>
                             <li>
-                                <a href="./claim_insurance.html"> <i class="flaticon-computer-8"></i> Process Claim </a>
+                                <a href="../view_policy.html"> <i class="flaticon-computer-5"></i>View Policy </a>
                             </li>
                             <li>
-                                <a href="get_balance.html"> <i class="flaticon-bitcoin-circle"></i> Check Balance </a>
+                                <a href="./claim_insurance.html"> <i class="flaticon-computer-8"></i> Process Claim </a>
                             </li>
+                            
                             <li>
                               <a href="./index.html">  <i class="mr-1 flaticon-power-button"></i>Logout </a>
                           </li>
@@ -146,7 +170,7 @@ text{
 
         <!--  BEGIN CONTENT PART  -->
         <div id="content" class="main-content">
-            <div class="container">
+            <!-- <div class="container">
                 <div class="page-header">
                     <div class="page-title card1 bg-blur">
                         <label class="text-gradient"> Public Key -  </label>
@@ -159,7 +183,7 @@ text{
                         <bold><label id="email"></label></bold>
                     </div>
                 </div>
-          </div>
+          </div> -->
 
 
               <div class="row mt-3">

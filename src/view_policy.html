@@ -20,8 +20,8 @@
       rgba(3, 32, 61, 1) 17%,
       rgba(14, 57, 70, 1) 73%
     );
-            margin-top: 35px;
-            color: white;
+            margin-top: 205px;
+            color: black;
         }
 
 #content {
@@ -38,6 +38,9 @@
 }
 input{
     color:white;
+}
+.card{
+    margin-top: 20px;
 }
     </style>
 </head>
@@ -88,52 +91,12 @@ input{
 
         <!--  BEGIN CONTENT PART  -->
         <div id="content" class="main-content">
-            <div class="container" id="add-policy">
-                <div style="text-align:right;">
-                    <button onClick="displayHash()" class="btn btn-primary mt-4">View Policy</button>
-                </div>
-            <div class="mb-3 col-lg-4 mt-3">
-                <label for="title" class="form-label text-gradient">Policy title</label>
-                <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" style="background-color: rgb(3, 32, 51); color: white;" required autofocus>
-            </div>
-            <div class="mb-3 col-lg-4 mt-3">
-                <label for="amt" class="form-label text-gradient">Amount Cover</label>
-                <input type="tel" class="form-control" id="amt" placeholder="Enter amt" name="amt" style="background-color: rgb(3, 32, 51); color: white;" required autofocus>
-            </div>
-            <div class="mb-3 col-lg-12 mt-3">
-                <label class="control-label text-gradient" for="details">Details:</label>
-            </div>
-            <div class="col-sm-10 col-lg-12">
-                <textarea class="form-control" rows="7" id="details" placeholder="Enter details to be added" name = "Details" style="background-color: rgb(3, 32, 51); color: white;"  required autofocus></textarea>
-            </div>
-            <div class="form-group mb-3 col-lg-12 mt-3">
-                <label for="policy_file" class=text-gradient>Select Policy doc </label>
-                <input type="file" class="form-control-file" id="policy_file" name="policy_file">
-            </div>
-            <div style="text-align: center;">
-            <button onClick="upload()" class="btn btn-primary mb-3 col-lg-3 mt-3" style="justify-content: center;">Submit</button>
-            </div>
+            <div class="container" >
+
+          <div class="view_policy mt-4" id="view_policy">
+
         </div>
-
-
-                    </div>
-
-                </div>
-          </div>
-          <div class="view_policy" id="view_policy">
-            <!-- <div class="card text-center">
-                <div class="card-header" >
-
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title"id="policy-title"></h5>
-                  <p class="card-text" id="policy-cover"></p>
-                  <p class="card-text" id="policy-detail"></p>
-                  <a href="" class="btn btn-primary" id="link-doc">View Document </a>
-                </div>
-
-              </div> -->
-        </div>
+  </div>
   </div>
   </div>
 
@@ -163,62 +126,11 @@ input{
     <script src="js/insurer.js"></script>
 
 <script>
-    $('#view_policy').hide();
-    function upload() {
-    const reader = new FileReader();
-    const photo = document.getElementById("policy_file");
-    var title = document.getElementById("title").value;
-    var amt = document.getElementById("amt").value;
-    var details = document.getElementById("details").value;
-    reader.readAsArrayBuffer(photo.files[0]);
-
-    reader.onloadend = function() {
-      var b = Buffer(reader.result);
-
-      ipfs.add(b, (err, result) => { // Upload buffer to IPFS
-        if (!err) {
-          console.log(result);
-        }
-        if(err) {
-          console.log(err);
-          return;
-        }
-        let url = `http://localhost:8080/ipfs/${result[0].hash}`
-        console.log(`Url = ${url}`);
-        console.log(key);
-
-        console.log(String(result[0].hash));
-        var policy_im = result[0].hash;
-
-        var buffer = Buffer(details);
-
-        ipfs.files.add(buffer, (error, result) => {
-            if(error){
-                console.log(error)
-            }else{
-                console.log(result);
-
-            }
-        });
-        var ipfshash=result[0].hash;
-
-        contractInstance.add_policy(title, amt, details,policy_im, {gas: 1000000}, function(error, res){
-            if (!err) {
-                console.log("result is");
-                console.log(res);
-                alert("Policy Added");
-            } else {
-              console.error(error);
-            }
-        });
-      });
-    };
-
-}
-function displayHash() {
-                $('#add-policy').hide();
-                $('#view_policy').show();
-                contractInstance.get_total_policies.call(function(error, result) {
+    $(window).on('load', function() {
+    connect();
+    key = web3.currentProvider.selectedAddress;
+    key = key.toLocaleLowerCase();
+    contractInstance.get_total_policies.call(function(error, result) {
                     if (!error) {
                         console.log(result);
                         total_len = result.c[0];
@@ -265,7 +177,7 @@ function displayHash() {
                                     card_body.appendChild(policy_detail);
                                     card_body.appendChild(view_doc);
 
-                                    card.appendChild(card_header);
+                                    
                                     card.appendChild(card_body);
                                     console.log(`Url = ${url}`);
 
@@ -280,23 +192,9 @@ function displayHash() {
                     console.error(error);
                     }
                 });
-                // contractInstance.get_policy.call(key, {gas: 1000000},function(error, result){
-                //   if(!error) {
-                //       console.log(result);
-                //       let url = `http://localhost:8080/ipfs/${result[3]}`;
-                //       var title=result[0];
-                //       var amt= result[1];
-                //       var details=result[2];
-                //       document.getElementById('policy-title').innerHTML = "Policy-title- "+title;
-                //       document.getElementById('policy-cover').innerHTML = "Amount-Cover- " +amt+"ethers";
-                //       document.getElementById('policy-detail').innerHTML = "Policy Details- " +details;
-                //       document.getElementById("link-doc").setAttribute("href",url);
-                //       console.log(`Url = ${url}`);
-                //   } else {
-                //     console.error(error);
-                //   }
-                // });
-              }
+
+});
+
 
 </script>
 
