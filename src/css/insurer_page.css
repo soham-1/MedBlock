@@ -66,7 +66,7 @@
     position: inherit;
     right: 22px;
     bottom: 16px;
-    font-size: large;
+    font-size: medium;
     transform: rotate(-45deg);
   }
 
@@ -106,7 +106,7 @@
     position: absolute;
     background: #001722;
     width: 250px;
-    height: 210px;
+    height: 310px;
     border-radius: 23px;
     padding: 40px 0 0 20px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.488);
@@ -115,7 +115,7 @@
 
   .left_container p {
     margin-bottom: 20px;
-    font-size: 1.2rem;
+    font-size: medium
   }
 
   .left_container .skills div {
