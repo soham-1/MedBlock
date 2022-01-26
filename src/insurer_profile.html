@@ -14,10 +14,46 @@
     <!-- END GLOBAL MANDATORY STYLES -->
 <style>
     .container{
-        background-color: white;
+        background-color: #1D1E22;
         margin-top: 35px;
-        color: black;
+        color: white;
     }
+    .main-content{
+        background-color: #1D1E22;
+    }
+    .text-glow {
+  text-shadow: 0 0 80px rgb(192 219 255 / 35%), 0 0 32px rgb(65 120 255 / 24%);
+}
+
+
+/* https://rareblocks.xyz/ */
+.text-gradient {
+  background: linear-gradient(to right, #30CFD0, #c43ad6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-blur {
+  overflow: hidden;
+  background-color: transparent;
+}
+rect{
+    fill: #1D1E22;
+}
+text{
+    fill:white;
+}
+
+.bg-blur::before {
+  content: '';
+  background-image: var(--bg-image);
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  filter: blur(30px);
+  z-index: -1;
+}
 </style>
 </head>
 
@@ -112,18 +148,42 @@
         <div id="content" class="main-content">
             <div class="container">
                 <div class="page-header">
-                    <div class="page-title">
-                        <label> Public Key -  </label>
+                    <div class="page-title card1 bg-blur">
+                        <label class="text-gradient"> Public Key -  </label>
                         <bold><label id="key">  </label>
                         <br>
-<label> Company Name -  </label>
-<bold><label id="name">  </label>
-<br>
-<label>Email - </label>
-<bold><label id="email"></label></bold>
+                        <label class="text-gradient"> Company Name -  </label>
+                        <bold><label id="name">  </label>
+                        <br>
+                        <label class="text-gradient">Email - </label>
+                        <bold><label id="email"></label></bold>
                     </div>
                 </div>
           </div>
+
+
+              <div class="row mt-3">
+                <div class="col-sm-6 col-lg-6">
+                  <div class="card container">
+                    <div class="card-body">
+                      <h5 class="card-title">Insurance Distribution</h5>
+
+                      <div class=" text-gradient" id="piechart_3d" style="height:400px;"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="card container">
+                    <div class="card-body">
+                      <h5 class="card-title">Yearly Distribution</h5>
+                      <div id="columnchart_material" style=" height: 400px;"></div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+    </div>
+
+
     </div>
   </div>
 
@@ -181,6 +241,50 @@
 
     </script>
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Task', 'Hours per Day'],
+      ['Claimed', 3],
+      ['Enrolled',   12],
+      ['Approved',  2],
+      ['Rejected', 2],
+    ]);
 
+    var options = {
+      is3D: true,
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+    chart.draw(data, options);
+  }
+</script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Year', 'Enrolled', 'Claimed', 'Approved'],
+        ['2014', 1000, 400, 200],
+        ['2015', 1170, 460, 250],
+        ['2016', 660, 1120, 300],
+        ['2017', 1030, 540, 350]
+      ]);
+
+      var options = {
+        chart: {
+        }
+      };
+
+      var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+  </script>
 </body>
 </html>
