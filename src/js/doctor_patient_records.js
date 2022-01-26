@@ -37,6 +37,7 @@ function populate_patient_list() {
                             upload_bill_button.innerHTML = `<button class="btn btn-success rounded-pill" id="${patientAddress}" onclick="get_bill('${patientAddress}')">Upload bill</button><input type="file" id="billupload" style="display: none"/>`;
                             let name = document.createTextNode(res[0]);
                             cell_data.appendChild(name);
+                            cell_data.style.color = "white";
                             row.appendChild(cell_data);
                             row.appendChild(view_button);
                             row.appendChild(upload_record_button);
